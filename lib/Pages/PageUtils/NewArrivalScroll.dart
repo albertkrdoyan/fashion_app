@@ -1,22 +1,25 @@
+import 'package:fashion_app/Provider/jsonProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NewArrivalScroll extends StatefulWidget {
-  const NewArrivalScroll({super.key, required this.sW, required this.categories, required this.catalog});
+class NewArrivalScroll extends ConsumerStatefulWidget {
+  const NewArrivalScroll({super.key, required this.sW, required this.categories,});
 
   final double sW;
   final List categories;
-  final List catalog;
 
   @override
-  State<NewArrivalScroll> createState() => _NewArrivalScrollState();
+  ConsumerState<NewArrivalScroll> createState() => _NewArrivalScrollState();
 }
 
-class _NewArrivalScrollState extends State<NewArrivalScroll> {
+class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
   @override
   Widget build(BuildContext context) {
+    // final List categories = ref.read(categoriesProvider);
+
     return SizedBox(
       height: 750 * widget.sW,
 
@@ -88,8 +91,7 @@ class _NewArrivalScrollState extends State<NewArrivalScroll> {
           Expanded(
             child: ItemShowByCategory(
               key: ValueKey(widget.key),
-              category: getSelectedCategory(),
-              itemList: widget.catalog,
+              category: getSelectedCategory(widget.categories),
               sW: widget.sW,
             )
           ),
@@ -120,26 +122,25 @@ class _NewArrivalScrollState extends State<NewArrivalScroll> {
     );
   }
 
-  String getSelectedCategory(){
-    for (int i = 0; i < widget.categories.length; ++i){
-      if (widget.categories[i][1]) return widget.categories[i][0];
+  String getSelectedCategory(List categories){
+    for (int i = 0; i < categories.length; ++i){
+      if (categories[i][1]) return categories[i][0];
     }
     return "";
   }
 }
 
-class ItemShowByCategory extends StatefulWidget {
-  const ItemShowByCategory({super.key, required this.category, required this.itemList, required this.sW});
+class ItemShowByCategory extends ConsumerStatefulWidget {
+  const ItemShowByCategory({super.key, required this.category, required this.sW});
 
-  final List itemList;
   final String category;
   final double sW;
 
   @override
-  State<ItemShowByCategory> createState() => _ItemShowByCategoryState();
+  ConsumerState<ItemShowByCategory> createState() => _ItemShowByCategoryState();
 }
 
-class _ItemShowByCategoryState extends State<ItemShowByCategory> {
+class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
   @override
   Widget build(BuildContext context) {
     List catItemsList = listByCategory();
@@ -212,13 +213,14 @@ class _ItemShowByCategoryState extends State<ItemShowByCategory> {
   }
 
   List listByCategory(){
-    if (widget.category == "All") return widget.itemList;
+    List itemList = ref.read(jsonDataProvider).value?['catalog'];
+    if (widget.category == "All") return itemList;
 
     List catItemsList = [];
 
-    for (int i = 0; i < widget.itemList.length; ++i){
-      if (widget.itemList[i]['category'] == widget.category){
-        catItemsList.add(widget.itemList[i]);
+    for (int i = 0; i < itemList.length; ++i){
+      if (itemList[i]['category'] == widget.category){
+        catItemsList.add(itemList[i]);
       }
     }
 

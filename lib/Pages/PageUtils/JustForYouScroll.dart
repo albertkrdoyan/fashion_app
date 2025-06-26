@@ -1,19 +1,21 @@
+import 'package:fashion_app/Provider/jsonProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Utils/DrawPageIndicator.dart';
 
-class JustForYouScroll extends StatelessWidget {
-  JustForYouScroll({super.key, required this.sW, required this.itemList});
+class JustForYouScroll extends ConsumerWidget {
+  JustForYouScroll({super.key, required this.sW});
 
   final double sW;
-  final List itemList;
+  // final List itemList;
 
   final justForYouSectionController = PageController(viewportFraction: 0.68);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       height: 531 * sW,
       width: 375 * sW,
@@ -44,7 +46,6 @@ class JustForYouScroll extends StatelessWidget {
 
           JustForYouSection(
             justForYouSectionController: justForYouSectionController,
-            items: itemList,
             sW: sW,
             count: 5,
           ),
@@ -60,56 +61,50 @@ class JustForYouScroll extends StatelessWidget {
   }
 }
 
-class JustForYouSection extends StatefulWidget {
-  const JustForYouSection({super.key, required this.justForYouSectionController, required this.items, required this.sW, required this.count});
+class JustForYouSection extends ConsumerWidget{
+  const JustForYouSection({super.key, required this.justForYouSectionController, required this.sW, required this.count});
 
   final PageController justForYouSectionController;
-  final List items;
   final double sW;
   final int count;
 
   @override
-  State<JustForYouSection> createState() => _JustForYouSectionState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    List items = ref.read(jsonDataProvider).value?['catalog'];
 
-class _JustForYouSectionState extends State<JustForYouSection> {
-  int initialIndex = 1;
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.items.isEmpty) {
+    if (items.isEmpty) {
       return const SizedBox.shrink(); // or some "No items found" message
     }
 
-    List newList = getRandomElements(widget.count, widget.items);
+    List newList = getRandomElements(count, items);
 
     return SizedBox(
-      height: 390 * widget.sW,
+      height: 390 * sW,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        controller: widget.justForYouSectionController,
-        itemCount: widget.count,
-        padding: EdgeInsets.symmetric(horizontal: 16 * widget.sW),
+        controller: justForYouSectionController,
+        itemCount: count,
+        padding: EdgeInsets.symmetric(horizontal: 16 * sW),
         itemBuilder:(context, index) => SizedBox(
-            width: 255 * widget.sW,
+            width: 255 * sW,
             key: ValueKey(index),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   key: ValueKey(index),
-                  width: 255 * widget.sW,
-                  height: 280 * widget.sW,
+                  width: 255 * sW,
+                  height: 280 * sW,
                   child: ItemShow(
                     key: ValueKey(index),
                     index: index,
                     catItemsList: newList,
-                    sW: widget.sW,
+                    sW: sW,
                     imgIndexes: List.generate(
                       newList[index]['extension'][1] - 2,
                           (index_) => index_ + 1,
                     ),
-                    padding: 255 * widget.sW * 0.01,
+                    padding: 255 * sW * 0.01,
                   ),
                 ),
 
@@ -119,7 +114,7 @@ class _JustForYouSectionState extends State<JustForYouSection> {
                       : '${newList[index]['name'].toString().substring(0, 41)}..'),
                   textAlign: TextAlign.center,
                   style: GoogleFonts.tenorSans(
-                      fontSize: 18 * widget.sW,
+                      fontSize: 18 * sW,
                       color: Color(0xFF333333)
                   ),
                 ),
@@ -128,7 +123,7 @@ class _JustForYouSectionState extends State<JustForYouSection> {
                   '\$${newList[index]['price']}',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.tenorSans(
-                      fontSize: 22 * widget.sW,
+                      fontSize: 22 * sW,
                       color: Color(0xFFDD8560),
                       fontWeight: FontWeight.w500
                   ),
@@ -136,7 +131,7 @@ class _JustForYouSectionState extends State<JustForYouSection> {
               ],
             )
         ),
-        separatorBuilder: (context, index) => SizedBox(width: 11 * widget.sW,),
+        separatorBuilder: (context, index) => SizedBox(width: 11 * sW,),
       ),
     );
   }
