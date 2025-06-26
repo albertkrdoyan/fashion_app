@@ -55,16 +55,6 @@ class TextOnScreen extends StatelessWidget {
                 ),
               ],
             )
-
-            // Text(
-            //   textOnImage.toUpperCase(),
-            //   softWrap: true,
-            //   style: GoogleFonts.bodoniModa(
-            //     fontSize: 38 * sW,
-            //     color: Color(0xFF446655).withAlpha(200),
-            //
-            //   ),
-            // ),
           ),
         )
       ],

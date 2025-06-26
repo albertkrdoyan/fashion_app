@@ -37,6 +37,7 @@ dependencies:
   smooth_page_indicator:
   google_fonts:
   flutter_staggered_grid_view:
+  flutter_riverpod:
 
 dev_dependencies:
   flutter_test:

@@ -47,8 +47,6 @@ class _MainPageState extends State<MainPage> {
       openFashionList = jsonDecode(values[4]);
 
       _readCategories(catalog);
-
-      setState(() {});
     });
 
     super.initState();
@@ -469,7 +467,7 @@ class _MainPageState extends State<MainPage> {
                       width: 375 * sW,
                       child: Column(
                         children: [
-                          SizedBox(height: 24 * sW,),
+                          SizedBox(height: 23.78 * sW,),
 
                           SizedBox(
                             width: 162 * sW,
@@ -507,7 +505,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
 
-                          SizedBox(height: 23 * sW,),
+                          SizedBox(height: 24 * sW,),
 
                           SizedBox(
                             width: 125 * sW,
@@ -519,20 +517,25 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
 
-                          SizedBox(height: 28 * sW,),
+                          SizedBox(height: 15.73 * sW,),
 
-                          Text(
-                            'support@openui.design\n+60 825 876\n08:00 - 22:00 - Everyday',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.tenorSans(
-                                fontSize: 16 * sW,
-                                letterSpacing: 0,
-                                color: Color(0xFF333333),
-                                height: 1.5 * sW
+                          Expanded(
+                            flex: 3,
+                            child: Center(
+                              child: Text(
+                                'support@openui.design\n+60 825 876\n08:00 - 22:00 - Everyday',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.tenorSans(
+                                    fontSize: 18 * sW,
+                                    letterSpacing: 0,
+                                    color: Color(0xFF333333),
+                                    height: 1.5 * sW
+                                ),
+                              ),
                             ),
                           ),
 
-                          SizedBox(height: 28 * sW,),
+                          SizedBox(height: 18.73 * sW,),
 
                           SizedBox(
                             width: 125 * sW,
@@ -544,38 +547,39 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
 
-                          SizedBox(height: 25 * sW,),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                'About',
-                                style: GoogleFonts.tenorSans(
-                                  fontSize: 16 * sW,
-                                  letterSpacing: 0,
-                                  color: Color(0xFF000000),
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'About',
+                                  style: GoogleFonts.tenorSans(
+                                    fontSize: 16 * sW,
+                                    letterSpacing: 0,
+                                    color: Color(0xFF000000),
+                                  ),
                                 ),
-                              ),
 
-                              Text(
-                                'Contact',
-                                style: GoogleFonts.tenorSans(
-                                  fontSize: 16 * sW,
-                                  letterSpacing: 0,
-                                  color: Color(0xFF000000),
+                                Text(
+                                  'Contact',
+                                  style: GoogleFonts.tenorSans(
+                                    fontSize: 16 * sW,
+                                    letterSpacing: 0,
+                                    color: Color(0xFF000000),
+                                  ),
                                 ),
-                              ),
 
-                              Text(
-                                'Blog',
-                                style: GoogleFonts.tenorSans(
-                                  fontSize: 16 * sW,
-                                  letterSpacing: 0,
-                                  color: Color(0xFF000000),
-                                ),
-                              )
-                            ],
+                                Text(
+                                  'Blog',
+                                  style: GoogleFonts.tenorSans(
+                                    fontSize: 16 * sW,
+                                    letterSpacing: 0,
+                                    color: Color(0xFF000000),
+                                  ),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -586,9 +590,12 @@ class _MainPageState extends State<MainPage> {
                       height: 45 * sW,
                       width: 375 * sW,
                       color: Color(0xFFC4C4C4),
-                      child: Container(
-                        padding: EdgeInsets.only(bottom: 12.5 * sW),
-                        alignment: Alignment.center,
+                      child: Center(
+                        // padding: EdgeInsets.only(bottom: 12.5 * sW),
+                        // alignment: Alignment.center,
+                        // color: Colors.red,
+                        // height: 19 * sW,
+                        // width: 240 * sW,
                         child: Text(
                           'Copyright© OpenUI All Rights Reserved.',
                           style: GoogleFonts.tenorSans(
