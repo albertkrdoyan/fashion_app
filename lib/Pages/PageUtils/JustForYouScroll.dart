@@ -8,9 +8,7 @@ import '../../Utils/DrawPageIndicator.dart';
 
 class JustForYouScroll extends ConsumerWidget {
   JustForYouScroll({super.key, required this.sW});
-
   final double sW;
-  // final List itemList;
 
   final justForYouSectionController = PageController(viewportFraction: 0.68);
 
@@ -120,7 +118,7 @@ class JustForYouSection extends ConsumerWidget{
                 ),
 
                 Text(
-                  '\$${newList[index]['price']}',
+                  '${newList[index]['price']} ${newList[index]['currency']}',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.tenorSans(
                       fontSize: 22 * sW,

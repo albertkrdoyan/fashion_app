@@ -1,10 +1,10 @@
 [
 	{
 		"name" : "Printed tulle midi dress",
-		"category" : "Dresses",
+		"category" : ["WOMEN", "Apparel", "Dresses"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 001/",
-		"price" : 19.900,
+		"price" : 19900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -18,10 +18,11 @@
 	},
 	{
 		"name" : "Ruffled halter dress",
-		"category" : "Dresses",
+		"category" : ["WOMEN", "Apparel", "Dresses"],
+		"mainCategory": ["WOMEN", "Apparel"],
 		"extension": ["dress_view_", 4],
 		"location": "/Dresses/Dress 002/",
-		"price" : 19.900,
+		"price" : 19900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -35,10 +36,10 @@
 	},
 	{
 		"name" : "Halter mini dress",
-		"category" : "Dresses",
+		"category" : ["WOMEN", "Apparel", "Dresses"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 003/",
-		"price" : 15.900,
+		"price" : 15900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -52,10 +53,10 @@
 	},
 	{
 		"name" : "Stretch mini dress with Bardot neckline",
-		"category" : "Dresses",
+		"category" : ["WOMEN", "Apparel", "Dresses"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 004/",
-		"price" : 13.900,
+		"price" : 13900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -69,10 +70,10 @@
 	},
 	{
 		"name" : "Strappy tulle dress",
-		"category" : "Dresses",
+		"category" : ["WOMEN", "Apparel", "Dresses"],
 		"extension": ["dress_view_", 6],
 		"location": "/Dresses/Dress 005/",
-		"price" : 15.900,
+		"price" : 15900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -86,10 +87,10 @@
 	},
 	{
 		"name" : "Ruffled mini dress with gathered detail",
-		"category" : "Dresses",
+		"category" : ["WOMEN", "Apparel", "Dresses"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 006/",
-		"price" : 17.900,
+		"price" : 17900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -104,10 +105,10 @@
 
 	{
 		"name" : "Tailored fit trousers with crossover waist",
-		"category" : "Trousers",
+		"category" : ["WOMEN", "Apparel", "Trousers"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 001/",
-		"price" : 25.900,
+		"price" : 25900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -121,10 +122,10 @@
 	},
 	{
 		"name" : "Plush barrel printed trousers",
-		"category" : "Trousers",
+		"category" : ["WOMEN", "Apparel", "Trousers"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 002/",
-		"price" : 19.900,
+		"price" : 19900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -138,10 +139,10 @@
 	},
 	{
 		"name" : "Printed baggy trousers",
-		"category" : "Trousers",
+		"category" : ["WOMEN", "Apparel", "Trousers"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 003/",
-		"price" : 23.900,
+		"price" : 23900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -155,10 +156,10 @@
 	},
 	{
 		"name" : "Linen blend balloon fit trousers with darts",
-		"category" : "Trousers",
+		"category" : ["WOMEN", "Apparel", "Trousers"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 004/",
-		"price" : 17.900,
+		"price" : 17900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -172,10 +173,10 @@
 	},
 	{
 		"name" : "Wide-leg trousers",
-		"category" : "Trousers",
+		"category" : ["WOMEN", "Apparel", "Trousers"],
 		"extension": ["trouser_view_", 7],
 		"location": "/Trousers/Trouser 005/",
-		"price" : 17.900,
+		"price" : 17900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -189,10 +190,10 @@
 	},
 	{
 		"name" : "Wide-leg trousers",
-		"category" : "Trousers",
+		"category" : ["WOMEN", "Apparel", "Trousers"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 006/",
-		"price" : 17.900,
+		"price" : 17900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -207,10 +208,10 @@
 
 	{
 		"name" : "Textured boho skirt",
-		"category" : "Skirts",
+		"category" : ["WOMEN", "Apparel", "Skirts"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 001/",
-		"price" : 17.900,
+		"price" : 17900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -224,10 +225,10 @@
 	},
 	{
 		"name" : "Box pleat mini skirt",
-		"category" : "Skirts",
+		"category" : ["WOMEN", "Apparel", "Skirts"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 002/",
-		"price" : 17.900,
+		"price" : 17900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -241,10 +242,10 @@
 	},
 	{
 		"name" : "Shimmery denim mini skirt",
-		"category" : "Skirts",
+		"category" : ["WOMEN", "Apparel", "Skirts"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 003/",
-		"price" : 19.900,
+		"price" : 19900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -258,10 +259,10 @@
 	},
 	{
 		"name" : "Ruffled mini skirt",
-		"category" : "Skirts",
+		"category" : ["WOMEN", "Apparel", "Skirts"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 004/",
-		"price" : 11.900,
+		"price" : 11900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -275,10 +276,10 @@
 	},
 	{
 		"name" : "Blonde lace ruffled mini skirt",
-		"category" : "Skirts",
+		"category" : ["WOMEN", "Apparel", "Skirts"],
 		"extension": ["skirt_view_", 6],
 		"location": "/Skirts/Skirt 005/",
-		"price" : 15.900,
+		"price" : 15900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -292,10 +293,10 @@
 	},
 	{
 		"name" : "Sequinned mini skirt",
-		"category" : "Skirts",
+		"category" : ["WOMEN", "Apparel", "Skirts"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 006/",
-		"price" : 15.900,
+		"price" : 15900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -310,10 +311,10 @@
 
 	{
 		"name" : "Printed short sleeve T-shirt with ruffles",
-		"category" : "T-shirt",
+		"category" : ["WOMEN", "Apparel", "T-shirt"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 001/",
-		"price" : 6.900,
+		"price" : 6900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -327,10 +328,10 @@
 	},
 	{
 		"name" : "Printed short sleeve oversize T-shirt",
-		"category" : "T-shirt",
+		"category" : ["WOMEN", "Apparel", "T-shirt"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 002/",
-		"price" : 6.900,
+		"price" : 6900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -344,10 +345,10 @@
 	},
 	{
 		"name" : "Vampire Diaries short sleeve T-shirt",
-		"category" : "T-shirt",
+		"category" : ["WOMEN", "Apparel", "T-shirt"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 003/",
-		"price" : 6.900,
+		"price" : 6900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -361,10 +362,10 @@
 	},
 	{
 		"name" : "Short sleeve T-shirt with embroidery",
-		"category" : "T-shirt",
+		"category" : ["WOMEN", "Apparel", "T-shirt"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 004/",
-		"price" : 10.900,
+		"price" : 10900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -378,10 +379,10 @@
 	},
 	{
 		"name" : "Printed short sleeve oversize T-shirt",
-		"category" : "T-shirt",
+		"category" : ["WOMEN", "Apparel", "T-shirt"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 005/",
-		"price" : 6.900,
+		"price" : 6900,
 		"currency": "AMD",
 		"Composition": 
 		{
@@ -395,10 +396,10 @@
 	},
 	{
 		"name" : "Short sleeve T-shirt with print",
-		"category" : "T-shirt",
+		"category" : ["WOMEN", "Apparel", "T-shirt"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 006/",
-		"price" : 3.900,
+		"price" : 3900,
 		"currency": "AMD",
 		"Composition": 
 		{

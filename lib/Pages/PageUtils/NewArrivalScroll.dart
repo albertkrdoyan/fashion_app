@@ -1,3 +1,4 @@
+import 'package:fashion_app/Provider/categoriesProvider.dart';
 import 'package:fashion_app/Provider/jsonProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +7,9 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NewArrivalScroll extends ConsumerStatefulWidget {
-  const NewArrivalScroll({super.key, required this.sW, required this.categories,});
+  const NewArrivalScroll({super.key, required this.sW,});
 
   final double sW;
-  final List categories;
 
   @override
   ConsumerState<NewArrivalScroll> createState() => _NewArrivalScrollState();
@@ -18,7 +18,9 @@ class NewArrivalScroll extends ConsumerStatefulWidget {
 class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
   @override
   Widget build(BuildContext context) {
-    // final List categories = ref.read(categoriesProvider);
+    final List categories = ref.read(categoriesProvider);
+
+    debugPrint(categories.toString());
 
     return SizedBox(
       height: 750 * widget.sW,
@@ -50,24 +52,24 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              for(int i = 0; i < widget.categories.length; ++i)...[
+              for(int i = 0; i < categories.length; ++i)...[
                 GestureDetector(
                   onTap: () {
-                    if (widget.categories[i][1]) return;
+                    if (categories[i][1]) return;
 
-                    for(int i2 = 0; i2 < widget.categories.length; ++i2){
-                      widget.categories[i2][1] = false;
+                    for(int i2 = 0; i2 < categories.length; ++i2){
+                      categories[i2][1] = false;
                     }
-                    widget.categories[i][1] = true;
+                    categories[i][1] = true;
 
                     setState(() {});
                   },
                   child: Column(
                     children: [
                       Text(
-                        widget.categories[i][0].toString(),
+                        categories[i][0].toString(),
                         style: GoogleFonts.tenorSans(
-                            color: widget.categories[i][1] == true ? Color(0xFF212806) : Color(0xFF888888),
+                            color: categories[i][1] == true ? Color(0xFF212806) : Color(0xFF888888),
                             fontSize: 20 * widget.sW
                         ),
                       ),
@@ -75,7 +77,7 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
                       Text(
                         '◆',
                         style: TextStyle(
-                          color: widget.categories[i][1] ? Color(0xFFDD8560) : Colors.transparent,
+                          color: categories[i][1] ? Color(0xFFDD8560) : Colors.transparent,
                           // fontSize: 20 * sW
                         ),
                       )
@@ -91,7 +93,7 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
           Expanded(
             child: ItemShowByCategory(
               key: ValueKey(widget.key),
-              category: getSelectedCategory(widget.categories),
+              category: getSelectedCategory(categories),
               sW: widget.sW,
             )
           ),
@@ -196,7 +198,7 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
                     ),
 
                     Text(
-                      '\$${catItemsList[index]['price']}',
+                      '${catItemsList[index]['price']} ${catItemsList[index]['currency']}',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.tenorSans(
                           fontSize: 16 * widget.sW,
@@ -219,7 +221,7 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
     List catItemsList = [];
 
     for (int i = 0; i < itemList.length; ++i){
-      if (itemList[i]['category'] == widget.category){
+      if (itemList[i]['category'].last == widget.category){
         catItemsList.add(itemList[i]);
       }
     }

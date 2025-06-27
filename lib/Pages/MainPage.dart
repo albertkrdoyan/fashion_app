@@ -1,13 +1,14 @@
 import 'dart:async';
+import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Pages/PageUtils/JustForYouScroll.dart';
 import 'package:fashion_app/Pages/PageUtils/NewArrivalScroll.dart';
+import 'package:fashion_app/Provider/categoriesProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:fashion_app/Utils/TextOnImage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../Provider/jsonProvider.dart';
 
 class MainPage extends ConsumerWidget{
@@ -16,28 +17,23 @@ class MainPage extends ConsumerWidget{
   int _currentPage = 0;
   Timer? _timer;
 
-  List categories = [
-    ['All', true]
-  ];
-
-  List dataList = [];
-  List catalog = [];
-  List trendsList = [];
-  List openFashionList = [];
-  List followUsList = [];
+  MenuPage? menuPage;
+  GlobalKey<MenuPageState> menuPageKey = GlobalKey<MenuPageState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double sW = MediaQuery.of(context).size.width / 375;
+
     return ref.watch(jsonDataProvider).when(
       data: (data) {
-        dataList = data['mainPage'];
-        catalog = data['catalog'];
-        trendsList = data['trends'];
-        openFashionList = data['openFashion'];
-        followUsList = data['followUs'];
+        final List dataList = data['mainPage'];
+        final List catalog = data['catalog'];
+        final List trendsList = data['trends'];
+        final List openFashionList = data['openFashion'];
+        final List followUsList = data['followUs'];
 
         _readCategories(catalog, ref);
+
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -45,11 +41,26 @@ class MainPage extends ConsumerWidget{
             centerTitle: true,
             toolbarHeight: 60 * sW,
             title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
-            leading: Image.asset('lib/Images/HomePage/Logo/Menu.png'),
+            leading: Builder(
+              builder: (context) => GestureDetector(
+                child: Image.asset('lib/Images/HomePage/Logo/Menu.png'),
+                onTap: () {
+                  // menuPage ??= MenuPage(key: menuPageKey,);
+
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MenuPage();
+                      },
+                    )
+                  );
+                },
+              ),
+            ),
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 16 * sW),
-                child: Image.asset('lib/Images/HomePage/Logo/Search.png'),
+                child: Image.asset('lib/Images/HomePage/Logo/Search.png',),
               ),
               // SizedBox(width: screenWidth * 0.04,),
               Padding(
@@ -123,11 +134,7 @@ class MainPage extends ConsumerWidget{
                   SizedBox(height: 27 * sW,),
 
                   // new arrival
-                  NewArrivalScroll(
-                    key: ValueKey(key),
-                    sW: sW,
-                    categories: categories,
-                  ),
+                  NewArrivalScroll(key: ValueKey(key), sW: sW,),
 
                   SizedBox(height: 37 * sW,),
 
@@ -619,24 +626,24 @@ class MainPage extends ConsumerWidget{
   }
 
   void _readCategories(List catalog, WidgetRef ref) {
+    if (ref.read(categoriesProvider).length > 1) return;
 
-
+    List<List<dynamic>> categories = [];
     bool skip = false;
+
     for (int i = 0; i < catalog.length; ++i){
       skip = false;
 
       for (int j = 0; j < categories.length; ++j){
-        if (categories[j][0] == catalog[i]['category']){
+        if (categories[j][0] == catalog[i]['category'].last){
           skip = true;
           break;
         }
       }
 
-      if (!skip){
-        categories.add([catalog[i]['category'], false]);
-      }
+      if (!skip) categories.add([catalog[i]['category'].last, false]);
     }
 
-    // ref.read(categoriesProvider.notifier).updateCategoriesList(categories);
+    ref.read(categoriesProvider.notifier).changeData(categories);
   }
 }
