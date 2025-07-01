@@ -1,4 +1,5 @@
-import 'package:fashion_app/Provider/jsonProvider.dart';
+import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,13 +69,13 @@ class JustForYouSection extends ConsumerWidget{
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List items = ref.read(jsonDataProvider).value?['catalog'];
+    List<Product> items = ref.watch(productCatalogProvider);
 
     if (items.isEmpty) {
       return const SizedBox.shrink(); // or some "No items found" message
     }
 
-    List newList = getRandomElements(count, items);
+    List<Product> newList = getRandomElements(count, items);
 
     return SizedBox(
       height: 390 * sW,
@@ -83,7 +84,7 @@ class JustForYouSection extends ConsumerWidget{
         controller: justForYouSectionController,
         itemCount: count,
         padding: EdgeInsets.symmetric(horizontal: 16 * sW),
-        itemBuilder:(context, index) => SizedBox(
+        itemBuilder: (context, index) => SizedBox(
             width: 255 * sW,
             key: ValueKey(index),
             child: Column(
@@ -98,18 +99,17 @@ class JustForYouSection extends ConsumerWidget{
                     index: index,
                     catItemsList: newList,
                     sW: sW,
-                    imgIndexes: List.generate(
-                      newList[index]['extension'][1] - 2,
-                          (index_) => index_ + 1,
+                    imgIndexes: List<int>.generate(
+                      newList[index].imgCount - 2, (index_) => index_ + 1,
                     ),
                     padding: 255 * sW * 0.01,
                   ),
                 ),
 
                 Text(
-                  (newList[index]['name'].length < 44
-                      ? '${newList[index]['name']}'
-                      : '${newList[index]['name'].toString().substring(0, 41)}..'),
+                  (newList[index].name.length < 44
+                      ? newList[index].name
+                      : '${newList[index].name.substring(0, 41)}..'),
                   textAlign: TextAlign.center,
                   style: GoogleFonts.tenorSans(
                       fontSize: 18 * sW,
@@ -118,7 +118,7 @@ class JustForYouSection extends ConsumerWidget{
                 ),
 
                 Text(
-                  '${newList[index]['price']} ${newList[index]['currency']}',
+                  '${newList[index].price} ${newList[index].currency}',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.tenorSans(
                       fontSize: 22 * sW,
@@ -134,10 +134,10 @@ class JustForYouSection extends ConsumerWidget{
     );
   }
 
-  List getRandomElements(int count, List items) {
+  List<Product> getRandomElements(int count, List<Product> items) {
     List indices = List.generate(items.length, (index) => index);
     indices.shuffle();
 
-    return List.generate(count, (index) => items[indices[index]],);
+    return List<Product>.generate(count, (index) => items[indices[index]],);
   }
 }

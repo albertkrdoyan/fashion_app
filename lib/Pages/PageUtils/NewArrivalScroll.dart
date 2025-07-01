@@ -1,5 +1,7 @@
+import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/categoriesProvider.dart';
-import 'package:fashion_app/Provider/jsonProvider.dart';
+import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,12 +20,10 @@ class NewArrivalScroll extends ConsumerStatefulWidget {
 class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
   @override
   Widget build(BuildContext context) {
-    final List categories = ref.read(categoriesProvider);
-
-    debugPrint(categories.toString());
+    List categories = ref.watch(categoriesProvider);
 
     return SizedBox(
-      height: 750 * widget.sW,
+      height: 800 * widget.sW,
 
       child: Column(
         children: [
@@ -49,75 +49,88 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
 
           SizedBox(height: 23 * widget.sW,),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              for(int i = 0; i < categories.length; ++i)...[
-                GestureDetector(
-                  onTap: () {
-                    if (categories[i][1]) return;
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 12 * widget.sW),
+            height: 80 * widget.sW,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                for(int i = 0; i < categories.length; ++i)...[
+                  GestureDetector(
+                    onTap: () {
+                      if (categories[i][1]) return;
 
-                    for(int i2 = 0; i2 < categories.length; ++i2){
-                      categories[i2][1] = false;
-                    }
-                    categories[i][1] = true;
+                      for(int i2 = 0; i2 < categories.length; ++i2){
+                        categories[i2][1] = false;
+                      }
+                      categories[i][1] = true;
 
-                    setState(() {});
-                  },
-                  child: Column(
-                    children: [
-                      Text(
-                        categories[i][0].toString(),
-                        style: GoogleFonts.tenorSans(
-                            color: categories[i][1] == true ? Color(0xFF212806) : Color(0xFF888888),
-                            fontSize: 20 * widget.sW
-                        ),
+                      setState(() {});
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12 * widget.sW),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            categories[i][0].toString(),
+                            style: GoogleFonts.tenorSans(
+                                color: categories[i][1] == true ? Color(0xFF212806) : Color(0xFF888888),
+                                fontSize: 20 * widget.sW
+                            ),
+                          ),
+
+                          Text(
+                            '◆',
+                            style: TextStyle(
+                              color: categories[i][1] ? Color(0xFFDD8560) : Colors.transparent,
+                            ),
+                          )
+                        ],
                       ),
-
-                      Text(
-                        '◆',
-                        style: TextStyle(
-                          color: categories[i][1] ? Color(0xFFDD8560) : Colors.transparent,
-                          // fontSize: 20 * sW
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ]
-            ],
+                    ),
+                  )
+                ]
+              ],
+            ),
           ),
 
-          SizedBox(height: widget.sW * 0.025,),
+          // SizedBox(height: widget.sW * 0.025,),
 
           Expanded(
             child: ItemShowByCategory(
               key: ValueKey(widget.key),
               category: getSelectedCategory(categories),
               sW: widget.sW,
-            )
+            ),
           ),
 
+          // SizedBox(height: 25 * widget.sW,),
+
           MaterialButton(
-              onPressed: (){},
-              child: SizedBox(
-                width: 165 * widget.sW,
-                height: 48 * widget.sW,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Explore more',
-                      style: GoogleFonts.tenorSans(
-                        fontSize: 20 * widget.sW,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w300
-                      )
-                    ),
-                    Icon(Icons.arrow_forward,)
-                  ],
-                ),
-              )
+            onPressed: (){
+              debugPrint(ref.read(searchKeywordsProvider).toString());
+            },
+            child: SizedBox(
+              // padding: EdgeInsets.only(top: 50 * widget.sW),
+              width: 165 * widget.sW,
+              height: 48 * widget.sW,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Explore more',
+                    style: GoogleFonts.tenorSans(
+                      fontSize: 20 * widget.sW,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300
+                    )
+                  ),
+                  Icon(Icons.arrow_forward,)
+                ],
+              ),
+            )
           ),
         ],
       ),
@@ -145,13 +158,13 @@ class ItemShowByCategory extends ConsumerStatefulWidget {
 class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
   @override
   Widget build(BuildContext context) {
-    List catItemsList = listByCategory();
+    List<Product> catItemsList = listByCategory();
     catItemsList.shuffle();
 
     return SizedBox(
-      height: 610 * widget.sW,
+      height: 530 * widget.sW,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16 * widget.sW, vertical: 13 * widget.sW),
+        padding: EdgeInsets.symmetric(horizontal: 16 * widget.sW,),
         child: MasonryGridView.count(
           key: ValueKey(widget.key),
           itemCount: catItemsList.length > 4 ? 4 : catItemsList.length,
@@ -181,15 +194,15 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
                           index: index,
                           catItemsList: catItemsList,
                           sW: widget.sW,
-                          imgIndexes: [catItemsList[index]['extension'][1] - 1, catItemsList[index]['extension'][1]],
+                          imgIndexes: [catItemsList[index].imgCount - 1, catItemsList[index].imgCount],
                           padding: 165 * widget.sW * 0.01,
                         )
                     ),
 
                     Text(
-                      (catItemsList[index]['name'].length < 44
-                          ? catItemsList[index]['name']
-                          : '${catItemsList[index]['name'].toString().substring(0, 41)}..'),
+                      (catItemsList[index].name.length < 44
+                          ? catItemsList[index].name
+                          : '${catItemsList[index].name.toString().substring(0, 41)}..'),
                       textAlign: TextAlign.center,
                       style: GoogleFonts.tenorSans(
                           fontSize: 14 * widget.sW,
@@ -198,7 +211,7 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
                     ),
 
                     Text(
-                      '${catItemsList[index]['price']} ${catItemsList[index]['currency']}',
+                      '${catItemsList[index].price} ${catItemsList[index].currency}',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.tenorSans(
                           fontSize: 16 * widget.sW,
@@ -214,14 +227,15 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
     );
   }
 
-  List listByCategory(){
-    List itemList = ref.read(jsonDataProvider).value?['catalog'];
+  List<Product> listByCategory(){
+    List<Product> itemList = ref.read(productCatalogProvider);
+
     if (widget.category == "All") return itemList;
 
-    List catItemsList = [];
+    List<Product> catItemsList = [];
 
     for (int i = 0; i < itemList.length; ++i){
-      if (itemList[i]['category'].last == widget.category){
+      if (itemList[i].category.last == widget.category){
         catItemsList.add(itemList[i]);
       }
     }

@@ -2,7 +2,11 @@ import 'dart:async';
 import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Pages/PageUtils/JustForYouScroll.dart';
 import 'package:fashion_app/Pages/PageUtils/NewArrivalScroll.dart';
+import 'package:fashion_app/Pages/ProductsViewPage.dart';
+import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/categoriesProvider.dart';
+import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:fashion_app/Utils/TextOnImage.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +31,14 @@ class MainPage extends ConsumerWidget{
     return ref.watch(jsonDataProvider).when(
       data: (data) {
         final List dataList = data['mainPage'];
-        final List catalog = data['catalog'];
         final List trendsList = data['trends'];
         final List openFashionList = data['openFashion'];
         final List followUsList = data['followUs'];
 
-        _readCategories(catalog, ref);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(productCatalogProvider.notifier).updateList(data['catalog']);
+          _readCategories(ref);
+        });
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -104,7 +110,12 @@ class MainPage extends ConsumerWidget{
                       Column(
                         children: [
                           MaterialButton(
-                            onPressed: (){},
+                            onPressed: (){
+
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => ProductsViewPage(),),
+                              );
+                            },
                             color: Colors.black.withAlpha(125),
                             height: 40 * sW,
                             minWidth: 253 * sW,
@@ -204,27 +215,27 @@ class MainPage extends ConsumerWidget{
                           width: 375 * sW,
                           height: 75 * sW,
                           child: MasonryGridView.custom(
-                              crossAxisSpacing: 8 * sW,
-                              scrollDirection: Axis.horizontal,
-                              gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2
-                              ),
-                              childrenDelegate: SliverChildListDelegate([
-                                for (int i = 0; i < trendsList.length; ++i)...[
-                                  Container(
-                                    // color: Colors.yellow,
-                                    padding: EdgeInsets.symmetric(horizontal: 10 * sW),
-                                    child: Center(
-                                      child: Text(
-                                        '#${trendsList[i]['name']}',
-                                        style: GoogleFonts.tenorSans(
-                                            fontSize: 16 * sW
-                                        ),
+                            crossAxisSpacing: 8 * sW,
+                            scrollDirection: Axis.horizontal,
+                            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2
+                            ),
+                            childrenDelegate: SliverChildListDelegate([
+                              for (int i = 0; i < trendsList.length; ++i)...[
+                                Container(
+                                  // color: Colors.yellow,
+                                  padding: EdgeInsets.symmetric(horizontal: 10 * sW),
+                                  child: Center(
+                                    child: Text(
+                                      '#${trendsList[i]['name']}',
+                                      style: GoogleFonts.tenorSans(
+                                          fontSize: 16 * sW
                                       ),
                                     ),
-                                  )
-                                ]
-                              ])
+                                  ),
+                                )
+                              ]
+                            ])
                           ),
                         )
                       ],
@@ -432,160 +443,7 @@ class MainPage extends ConsumerWidget{
                   SizedBox(height: 18 * sW,),
 
                   // bottom
-                  SizedBox(
-                    height: 340 * sW,
-                    width: 375 * sW,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // info
-                        SizedBox(
-                          height: 295 * sW,
-                          width: 375 * sW,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 23.78 * sW,),
-
-                              SizedBox(
-                                width: 162 * sW,
-                                height: 24 * sW,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: 24 * sW,
-                                      width: 24 * sW,
-                                      child: Image.asset(
-                                        'lib/Images/Bottom/InstagramDark.png',
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-
-                                    SizedBox(
-                                      height: 24 * sW,
-                                      width: 24 * sW,
-                                      child: Image.asset(
-                                        'lib/Images/Bottom/TwitterDark.png',
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-
-                                    SizedBox(
-                                      height: 24 * sW,
-                                      width: 24 * sW,
-                                      child: Image.asset(
-                                        'lib/Images/Bottom/YouTubeDark.png',
-                                        fit: BoxFit.contain,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-
-                              SizedBox(height: 24 * sW,),
-
-                              SizedBox(
-                                width: 125 * sW,
-                                height: 9.25 * sW,
-                                child: Image.asset(
-                                  'lib/Images/HomePage/Logo/Line.png',
-                                  color: Colors.black,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-
-                              SizedBox(height: 15.73 * sW,),
-
-                              Expanded(
-                                flex: 3,
-                                child: Center(
-                                  child: Text(
-                                    'support@openui.design\n+60 825 876\n08:00 - 22:00 - Everyday',
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.tenorSans(
-                                        fontSize: 18 * sW,
-                                        letterSpacing: 0,
-                                        color: Color(0xFF333333),
-                                        height: 1.5 * sW
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              SizedBox(height: 18.73 * sW,),
-
-                              SizedBox(
-                                width: 125 * sW,
-                                height: 9.25 * sW,
-                                child: Image.asset(
-                                  'lib/Images/HomePage/Logo/Line.png',
-                                  color: Colors.black,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-
-                              Expanded(
-                                flex: 1,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      'About',
-                                      style: GoogleFonts.tenorSans(
-                                        fontSize: 16 * sW,
-                                        letterSpacing: 0,
-                                        color: Color(0xFF000000),
-                                      ),
-                                    ),
-
-                                    Text(
-                                      'Contact',
-                                      style: GoogleFonts.tenorSans(
-                                        fontSize: 16 * sW,
-                                        letterSpacing: 0,
-                                        color: Color(0xFF000000),
-                                      ),
-                                    ),
-
-                                    Text(
-                                      'Blog',
-                                      style: GoogleFonts.tenorSans(
-                                        fontSize: 16 * sW,
-                                        letterSpacing: 0,
-                                        color: Color(0xFF000000),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-
-                        // copyright
-                        Container(
-                          height: 45 * sW,
-                          width: 375 * sW,
-                          color: Color(0xFFC4C4C4),
-                          child: Center(
-                            // padding: EdgeInsets.only(bottom: 12.5 * sW),
-                            // alignment: Alignment.center,
-                            // color: Colors.red,
-                            // height: 19 * sW,
-                            // width: 240 * sW,
-                            child: Text(
-                              'Copyright© OpenUI All Rights Reserved.',
-                              style: GoogleFonts.tenorSans(
-                                  fontSize: 12 * sW,
-                                  letterSpacing: 0,
-                                  color: Color(0xFF555555)
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  BottomInfo()
                 ],
               ),
             ),
@@ -625,25 +483,190 @@ class MainPage extends ConsumerWidget{
     });
   }
 
-  void _readCategories(List catalog, WidgetRef ref) {
+  void _readCategories(WidgetRef ref) {
     if (ref.read(categoriesProvider).length > 1) return;
 
     List<List<dynamic>> categories = [];
+    List<Product> catalog = ref.read(productCatalogProvider);
     bool skip = false;
 
     for (int i = 0; i < catalog.length; ++i){
       skip = false;
 
       for (int j = 0; j < categories.length; ++j){
-        if (categories[j][0] == catalog[i]['category'].last){
+        if (categories[j][0] == catalog[i].category.last){
           skip = true;
           break;
         }
       }
 
-      if (!skip) categories.add([catalog[i]['category'].last, false]);
+      if (!skip) categories.add([catalog[i].category.last, false]);
     }
 
     ref.read(categoriesProvider.notifier).changeData(categories);
+  }
+}
+
+class BottomInfo extends StatelessWidget {
+  const BottomInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double sW = MediaQuery.of(context).size.width / 375;
+
+    return SizedBox(
+      height: 340 * sW,
+      width: 375 * sW,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // info
+          SizedBox(
+            height: 295 * sW,
+            width: 375 * sW,
+            child: Column(
+              children: [
+                SizedBox(height: 23.78 * sW,),
+
+                SizedBox(
+                  width: 162 * sW,
+                  height: 24 * sW,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 24 * sW,
+                        width: 24 * sW,
+                        child: Image.asset(
+                          'lib/Images/Bottom/InstagramDark.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 24 * sW,
+                        width: 24 * sW,
+                        child: Image.asset(
+                          'lib/Images/Bottom/TwitterDark.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 24 * sW,
+                        width: 24 * sW,
+                        child: Image.asset(
+                          'lib/Images/Bottom/YouTubeDark.png',
+                          fit: BoxFit.contain,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 24 * sW,),
+
+                SizedBox(
+                  width: 125 * sW,
+                  height: 9.25 * sW,
+                  child: Image.asset(
+                    'lib/Images/HomePage/Logo/Line.png',
+                    color: Colors.black,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+
+                SizedBox(height: 15.73 * sW,),
+
+                Expanded(
+                  flex: 3,
+                  child: Center(
+                    child: Text(
+                      'support@openui.design\n+60 825 876\n08:00 - 22:00 - Everyday',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.tenorSans(
+                          fontSize: 18 * sW,
+                          letterSpacing: 0,
+                          color: Color(0xFF333333),
+                          height: 1.5 * sW
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 18.73 * sW,),
+
+                SizedBox(
+                  width: 125 * sW,
+                  height: 9.25 * sW,
+                  child: Image.asset(
+                    'lib/Images/HomePage/Logo/Line.png',
+                    color: Colors.black,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'About',
+                        style: GoogleFonts.tenorSans(
+                          fontSize: 16 * sW,
+                          letterSpacing: 0,
+                          color: Color(0xFF000000),
+                        ),
+                      ),
+
+                      Text(
+                        'Contact',
+                        style: GoogleFonts.tenorSans(
+                          fontSize: 16 * sW,
+                          letterSpacing: 0,
+                          color: Color(0xFF000000),
+                        ),
+                      ),
+
+                      Text(
+                        'Blog',
+                        style: GoogleFonts.tenorSans(
+                          fontSize: 16 * sW,
+                          letterSpacing: 0,
+                          color: Color(0xFF000000),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+
+          // copyright
+          Container(
+            height: 45 * sW,
+            width: 375 * sW,
+            color: Color(0xFFC4C4C4),
+            child: Center(
+              // padding: EdgeInsets.only(bottom: 12.5 * sW),
+              // alignment: Alignment.center,
+              // color: Colors.red,
+              // height: 19 * sW,
+              // width: 240 * sW,
+              child: Text(
+                'Copyright© OpenUI All Rights Reserved.',
+                style: GoogleFonts.tenorSans(
+                    fontSize: 12 * sW,
+                    letterSpacing: 0,
+                    color: Color(0xFF555555)
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
