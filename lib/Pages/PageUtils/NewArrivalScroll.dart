@@ -1,7 +1,7 @@
-import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Pages/ProductsViewPage.dart';
+import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/categoriesProvider.dart';
-import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -110,7 +110,9 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
 
           MaterialButton(
             onPressed: (){
-              debugPrint(ref.read(searchKeywordsProvider).toString());
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ProductsViewPage(),),
+              );
             },
             child: SizedBox(
               // padding: EdgeInsets.only(top: 50 * widget.sW),
@@ -191,8 +193,7 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
                         width: 165 * widget.sW,
                         child: ItemShow(
                           key: ValueKey(index),
-                          index: index,
-                          catItemsList: catItemsList,
+                          product: catItemsList[index],
                           sW: widget.sW,
                           imgIndexes: [catItemsList[index].imgCount - 1, catItemsList[index].imgCount],
                           padding: 165 * widget.sW * 0.01,

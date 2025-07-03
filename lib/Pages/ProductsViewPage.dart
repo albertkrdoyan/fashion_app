@@ -1,9 +1,8 @@
 import 'package:fashion_app/Pages/MainPage.dart';
 import 'package:fashion_app/Pages/MenuPage.dart';
-import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/NumberedPageIndicatorProvider.dart';
-import 'package:fashion_app/Provider/categoriesProvider.dart';
 import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:fashion_app/Utils/NumberedPageIndicator.dart';
@@ -99,11 +98,11 @@ class ProductsViewPage extends ConsumerWidget {
                                   for (int i = 0; i < searchKeywords.length; ++i)...[
                                     Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(30 * sW),
-                                          border: Border.all(
-                                              width: 1 * sW,
-                                              color: Color(0xFFDEDEDE)
-                                          )
+                                        borderRadius: BorderRadius.circular(30 * sW),
+                                        border: Border.all(
+                                          width: 1 * sW,
+                                          color: Color(0xFFDEDEDE)
+                                        )
                                       ),
                                       margin: EdgeInsets.only(left: 2.5 * sW, right: 2.5 * sW, top: 8 * sW),
                                       padding: EdgeInsets.symmetric(horizontal: 15 * sW, vertical: 8 * sW),
@@ -112,18 +111,18 @@ class ProductsViewPage extends ConsumerWidget {
                                           Text(
                                             searchKeywords[i][0],
                                             style: GoogleFonts.tenorSans(
-                                                fontSize: 14 * sW
+                                              fontSize: 14 * sW
                                             ),
                                           ),
 
                                           SizedBox(width: 6 * sW,),
 
                                           GestureDetector(
-                                              onTap: () {
-                                                ref.read(searchKeywordsProvider.notifier).removeFromKeywords(searchKeywords[i][0]);
-                                                ref.read(numberedPageIndicatorProvider.notifier).changeCurrentPage(0);
-                                              },
-                                              child: Icon(Icons.close, size: 18 * sW,)
+                                            onTap: () {
+                                              ref.read(searchKeywordsProvider.notifier).removeFromKeywords(searchKeywords[i][0]);
+                                              ref.read(numberedPageIndicatorProvider.notifier).changeCurrentPage(0);
+                                            },
+                                            child: Icon(Icons.close, size: 18 * sW,)
                                           ),
                                         ],
                                       ),
@@ -138,6 +137,8 @@ class ProductsViewPage extends ConsumerWidget {
 
                           // show items
                           BuildItemsShow(),
+
+                          SizedBox(height: 50 * sW,),
 
                           // bottom part
                           Spacer(),
@@ -185,66 +186,260 @@ class BuildItemsShow extends ConsumerWidget{
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(listItemsCountProvider.notifier).update(list.length);
+
+      scrollController.animateTo(
+        0,
+        duration: Duration(milliseconds: 300), // or any duration you like
+        curve: Curves.easeInOut,               // or Curves.linear, etc.
+      );
     });
 
     ref.read(numberedPageIndicatorProvider.notifier).setPagesCount((list.length ~/ 10) + (list.length % 10 != 0 ? 1 : 0));
     // ref.read(numberedPageIndicatorProvider.notifier).setPagesCount(15);
 
     final currentPage = ref.watch(numberedPageIndicatorProvider).currentPage;
-    final int currentPageInfo = list.length - currentPage * 10, h = 300;
+    final int currentPageInfo = list.length - currentPage * 10, h = isGridView ? 300 : 300;
     final double height = (currentPageInfo > 8 ? 1500 : (currentPageInfo ~/ 2 + (currentPageInfo % 2 == 0 ? 0 : 1)) * h) * sW;
 
     return Column(
       children: [
-        if (isGridView)...[
-          Container(
-            height: height,
-            padding: EdgeInsets.symmetric(horizontal: 16.5 * sW, vertical: 8 * sW),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: currentPageInfo > 10 ? 10 : currentPageInfo,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 15,
-                  childAspectRatio: 0.579
+        if(true)
+          if (isGridView)...[
+            Container(
+              height: height,
+              padding: EdgeInsets.symmetric(horizontal: 16.5 * sW, vertical: 8 * sW),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: currentPageInfo > 10 ? 10 : currentPageInfo,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 0.579
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  int thisIndex = index + currentPage * 10;
+
+                  return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color(0xFFE3E3E3),
+                          width: 1 * sW
+                      ),
+                      borderRadius: BorderRadius.circular(2 * sW),
+                      boxShadow: [BoxShadow(color: Colors.white54, blurRadius: 2)],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 219 * sW,
+                          width: 165 * sW,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              ItemShow(
+                                product: list[thisIndex],
+                                sW: sW,
+                                imgIndexes: [list[thisIndex].imgCount - 1, list[thisIndex].imgCount],
+                                padding: 165 * sW * 0.01,
+                              ),
+
+                              Container(
+                                margin: EdgeInsets.only(bottom: 6 * sW, right: 9 * sW),
+                                alignment: Alignment.bottomRight,
+                                child: Icon(
+                                  Icons.favorite_border_outlined,
+                                  color: Color(0xFFDD8560),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.0 * sW),
+                          child: Text(
+                            list[thisIndex].name,
+                            style: GoogleFonts.tenorSans(
+                                fontSize: 12 * sW,
+                                color: Colors.black
+                            ),
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.0 * sW),
+                          child: Text(
+                            '${list[thisIndex].price} ${list[thisIndex].currency}',
+                            style: GoogleFonts.tenorSans(
+                                fontSize: 15 * sW,
+                                color: Color(0xFFDD8560)
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
               ),
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  color: Colors.red,
-                  child: Column(
-                    children: [
-                      Image.asset('lib/Images/Catalog${list[index].location}${list[index].extension}00${list[index].imgCount - 1}.jpg'),
+            )
+          ]
+          else...[
+            Container(
+              height: height,
+              padding: EdgeInsets.symmetric(horizontal: 16.5 * sW, vertical: 8 * sW),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: currentPageInfo > 10 ? 10 : currentPageInfo,
+                itemBuilder: (BuildContext context, int index) {
+                  int thisIndex = index + currentPage * 10;
 
-                      Text(list[index].name),
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 6 * sW),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color(0xFFE3E3E3),
+                          width: 1 * sW
+                      ),
+                      borderRadius: BorderRadius.circular(2 * sW),
+                      boxShadow: [BoxShadow(color: Colors.white54, blurRadius: 2)],
+                    ),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 134 * sW,
+                          width: 100 * sW,
+                          child: ItemShow(
+                            product: list[thisIndex],
+                            sW: sW,
+                            imgIndexes: [list[thisIndex].imgCount - 1, list[thisIndex].imgCount],
+                            padding: 90 * sW * 0.01,
+                          ),
+                        ),
 
-                      Text(list[index].price.toString())
-                    ],
-                  ),
-                );
-                // return Container(
-                //   padding: EdgeInsets.all(8 * sW),
-                //   decoration: BoxDecoration(
-                //     color: Colors.white,
-                //     borderRadius: BorderRadius.circular(10 * sW),
-                //     boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
-                //   ),
-                //   child: ItemShow(
-                //     index: index,
-                //     catItemsList: list, // poxel
-                //     sW: sW,
-                //     imgIndexes: [list[index].imgCount - 1, list[index].imgCount],
-                //     padding: 165 * sW * 0.01,
-                //   ),
-                // );
-              },
-            ),
-          )
-        ]
-        else...[
-          Text("ListView")
-        ],
+                        Container(
+                          width: 230 * sW,
+                          height: 134 * sW,
+                          padding: EdgeInsets.symmetric(horizontal: 5 * sW),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    list[thisIndex].brand,
+                                    softWrap: true,
+                                    style: GoogleFonts.tenorSans(
+                                        fontSize: 20 * sW,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+
+                                  Icon(
+                                    Icons.favorite_border_outlined,
+                                    color: Color(0xFFDD8560),
+                                  )
+                                ],
+                              ),
+
+                              Text(
+                                list[thisIndex].name,
+                                softWrap: true,
+                                style: GoogleFonts.tenorSans(
+                                    fontSize: 14 * sW,
+                                    color: Colors.black
+                                ),
+                              ),
+
+                              Text(
+                                '${list[thisIndex].price} ${list[thisIndex].currency}',
+                                style: GoogleFonts.tenorSans(
+                                    fontSize: 18 * sW,
+                                    color: Color(0xFFDD8560)
+                                ),
+                              ),
+
+                              Row(
+                                children: [
+                                  Text(
+                                    'Size: ',
+                                    style: GoogleFonts.tenorSans(
+                                        fontSize: 14 * sW,
+                                        color: Color(0xFF555555)
+                                    ),
+                                  ),
+
+                                  if (list[thisIndex].size.length == 1)...[
+                                    Container(
+                                      height: 28 * sW,
+                                      width: 110 * sW,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8 * sW),
+                                          border: Border.all(
+                                              width: 1 * sW,
+                                              color: Color(0xFFE3E3E3)
+                                          )
+                                      ),
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          list[thisIndex].size[0],
+                                          style: GoogleFonts.tenorSans(
+                                              fontSize: 16 * sW,
+                                              color: Color(0xFF555555)
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ]else...[
+                                    for (int i = 0; i < list[thisIndex].size.length; ++i)...[
+                                      Container(
+                                        margin: EdgeInsets.only(right: 6 * sW),
+                                        height: 28 * sW,
+                                        width: 28 * sW,
+                                        decoration: BoxDecoration(
+                                          // borderRadius: BorderRadius.circular(8 * sW),
+                                            border: Border.all(
+                                              width: 1 * sW,
+                                              color: Color(0xFFE3E3E3),
+                                            ),
+                                            shape: BoxShape.circle
+                                        ),
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            list[thisIndex].size[i],
+                                            style: GoogleFonts.tenorSans(
+                                                fontSize: 10 * sW,
+                                                color: Color(0xFF555555),
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ]
+                                  ]
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
 
         SizedBox(height: 55 * sW,),
         NumberedPageIndicator(),

@@ -7,9 +7,6 @@ class CategoriesNotifier extends Notifier<List<List<dynamic>>>{
   }
 
   void changeData(List<List<dynamic>> newData){
-    // for (int i = 0; i < newData.length; ++i){
-    //   state.add(newData[i]);
-    // }
     state = [...state, ...newData];
   }
 }

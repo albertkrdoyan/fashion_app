@@ -3,10 +3,9 @@ import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Pages/PageUtils/JustForYouScroll.dart';
 import 'package:fashion_app/Pages/PageUtils/NewArrivalScroll.dart';
 import 'package:fashion_app/Pages/ProductsViewPage.dart';
-import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/categoriesProvider.dart';
-import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:fashion_app/Utils/TextOnImage.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +110,6 @@ class MainPage extends ConsumerWidget{
                         children: [
                           MaterialButton(
                             onPressed: (){
-
                               Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) => ProductsViewPage(),),
                               );

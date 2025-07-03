@@ -94,7 +94,12 @@ flutter:
      - lib/Images/Catalog/Trousers/Trouser 004/
      - lib/Images/Catalog/Trousers/Trouser 005/
      - lib/Images/Catalog/Trousers/Trouser 006/
-  #   - images/a_dot_ham.jpeg
+     - lib/Images/Catalog/S-Bags/S-Bag 001/
+     - lib/Images/Catalog/S-Bags/S-Bag 002/
+     - lib/Images/Catalog/S-Bags/S-Bag 003/
+     - lib/Images/Catalog/S-Bags/S-Bag 004/
+     - lib/Images/Catalog/T-Bags/T-Bag 001/
+     - lib/Images/Catalog/T-Bags/T-Bag 002/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

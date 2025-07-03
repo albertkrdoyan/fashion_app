@@ -1,4 +1,4 @@
-import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
@@ -96,8 +96,7 @@ class JustForYouSection extends ConsumerWidget{
                   height: 280 * sW,
                   child: ItemShow(
                     key: ValueKey(index),
-                    index: index,
-                    catItemsList: newList,
+                    product: newList[index],
                     sW: sW,
                     imgIndexes: List<int>.generate(
                       newList[index].imgCount - 2, (index_) => index_ + 1,

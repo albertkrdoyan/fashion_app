@@ -1,6 +1,8 @@
 class Product{
   final String name;
+  final String brand;
   final List<String> category;
+  final List<String> size;
   final String extension;
   final int imgCount;
   final String location;
@@ -17,7 +19,9 @@ class Product{
 
   Product({
     required this.name,
+    required this.brand,
     required this.category,
+    required this.size,
     required this.extension,
     required this.imgCount,
     required this.location,
@@ -46,7 +50,9 @@ class Product{
 
     return Product(
       name: json['name'],
+      brand: json['brand'],
       category: catList,
+      size: List<String>.from(json['size']),
       extension: json['extension'][0],
       imgCount: json['extension'][1],
       location: json['location'],

@@ -1,11 +1,10 @@
-import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Models/Products.dart';
 import 'package:flutter/material.dart';
 
 class ItemShow extends StatefulWidget {
-  const ItemShow({super.key, required this.index, required this.catItemsList, required this.sW, required this.imgIndexes, required this.padding});
+  const ItemShow({super.key, required this.product, required this.sW, required this.imgIndexes, required this.padding});
 
-  final int index;
-  final List<Product> catItemsList;
+  final Product product;
   final List imgIndexes;
   final double sW, padding;
 
@@ -23,7 +22,7 @@ class _ItemShowState extends State<ItemShow> {
       fit: StackFit.expand,
       children: [
         Image.asset(
-          'lib/Images/Catalog${widget.catItemsList[widget.index].location}${widget.catItemsList[widget.index].extension}${formatNumber(widget.imgIndexes[initialIndex])}.jpg',
+          'lib/Images/Catalog${widget.product.location}${widget.product.extension}${formatNumber(widget.imgIndexes[initialIndex])}.jpg',
           fit: BoxFit.cover,
           alignment: Alignment.center,
         ),

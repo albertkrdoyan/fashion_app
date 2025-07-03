@@ -6,7 +6,6 @@ class PageIndicator{
 
   PageIndicator({this.currentPage = 0, required this.totalPagesCount});
 }
-
 class PageIndicatorProvider extends Notifier<PageIndicator>{
   @override
   PageIndicator build() {
@@ -21,10 +20,10 @@ class PageIndicatorProvider extends Notifier<PageIndicator>{
     state = PageIndicator(totalPagesCount: state.totalPagesCount, currentPage: changeTo);
   }
 }
-
 final numberedPageIndicatorProvider = NotifierProvider<PageIndicatorProvider, PageIndicator>(() {
   return PageIndicatorProvider();
 },);
+
 
 class ListItemsCount extends Notifier<int>{
   @override
@@ -36,7 +35,6 @@ class ListItemsCount extends Notifier<int>{
     state = count;
   }
 }
-
 final listItemsCountProvider = NotifierProvider<ListItemsCount, int>(() {
   return ListItemsCount();
 },);

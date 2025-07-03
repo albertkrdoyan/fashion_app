@@ -46,7 +46,6 @@ class SearchKeywords extends Notifier<List<List<dynamic>>>{
     return false;
   }
 }
-
 final searchKeywordsProvider = NotifierProvider<SearchKeywords, List<List<dynamic>>>(() {
   return SearchKeywords();
 },);
@@ -62,10 +61,10 @@ class ItemsGridView extends Notifier<bool>{
     state = !state;
   }
 }
-
 final gridViewProvider = NotifierProvider<ItemsGridView, bool>(() {
   return ItemsGridView();
 },);
+
 
 class FilterView extends Notifier<bool>{
   @override
@@ -77,7 +76,8 @@ class FilterView extends Notifier<bool>{
     state = !state;
   }
 }
-
 final filterProvider = NotifierProvider<FilterView, bool>(() {
   return FilterView();
 },);
+
+

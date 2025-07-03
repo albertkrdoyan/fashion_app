@@ -1,5 +1,5 @@
 import 'package:fashion_app/Pages/ProductsViewPage.dart';
-import 'package:fashion_app/Products/Products.dart';
+import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/NumberedPageIndicatorProvider.dart';
 import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/NumberedPageIndicator.dart';
@@ -111,7 +111,7 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
     if (!Product.categories.containsKey(widget.currentMenu)) return;
 
     subCategories = Product.categories[widget.currentMenu]!;
-    subCatNames = subCategories.keys.toList() ?? [];
+    subCatNames = subCategories.keys.toList();
     isExpandedList = List<bool>.generate(subCatNames.length, (_) => false);
   }
 
@@ -120,12 +120,12 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
     double sW = MediaQuery.of(context).size.width / 375;
     double sH = MediaQuery.of(context).size.height / 640;
 
-    final anyExpanded = isExpandedList.any((e) => e);
-
     final style = GoogleFonts.tenorSans(
         fontSize: 16 * sW,
         color: Color(0xFF333333)
     );
+
+    debugPrint(subCatNames.toString());
 
     if (!Product.categories.containsKey(widget.currentMenu)) {
       return Expanded(
@@ -178,6 +178,7 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
                           children: [
                             SubMenuDraw(
                                 currentMenu: widget.currentMenu,
+                                subCatName: subCatNames[i],
                                 subCategoriesMenu: 'All',
                                 style: style,
                                 sH: sH
@@ -186,6 +187,7 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
                             for (int j = 0; j < subCategories[subCatNames[i]]!.length; ++j)...[
                               SubMenuDraw(
                                 currentMenu: widget.currentMenu,
+                                subCatName: subCatNames[i],
                                 subCategoriesMenu: subCategories[subCatNames[i]]![j],
                                 style: style,
                                 sH: sH,
@@ -209,8 +211,8 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
 }
 
 class SubMenuDraw extends ConsumerWidget {
-  const SubMenuDraw ({super.key, required this.currentMenu, required this.subCategoriesMenu, required this.style, required this.sH});
-  final String currentMenu, subCategoriesMenu;
+  const SubMenuDraw ({super.key, required this.currentMenu, required this.subCatName, required this.subCategoriesMenu, required this.style, required this.sH});
+  final String currentMenu, subCategoriesMenu, subCatName;
   final TextStyle style;
   final double sH;
 
@@ -219,18 +221,18 @@ class SubMenuDraw extends ConsumerWidget {
     return ListTile(
       title: InkWell(
         onTap: () {
-          String cat = "$currentMenu / $subCategoriesMenu";
+          String cat = "$currentMenu / $subCatName / $subCategoriesMenu";
           ref.read(searchKeywordsProvider.notifier).addToKeywords([cat, true]);
           Navigator.pop(context);
           debugPrint(ProductsViewPage.isProductsViewPageActive.toString());
           if (!ProductsViewPage.isProductsViewPageActive){
-            debugPrint('hello');
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => ProductsViewPage(),),
             );
           }
-          ref.read(numberedPageIndicatorProvider.notifier).changeCurrentPage(0);
-          scrollController.jumpTo(0);
+          else{
+            ref.read(numberedPageIndicatorProvider.notifier).changeCurrentPage(0);
+          }
         },
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 5 * sH),

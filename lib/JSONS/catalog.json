@@ -1,7 +1,9 @@
 [
 	{
 		"name" : "Printed tulle midi dress",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Dresses"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 001/",
 		"price" : 19900,
@@ -18,7 +20,9 @@
 	},
 	{
 		"name" : "Ruffled halter dress",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Dresses"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"mainCategory": ["WOMEN", "Apparel"],
 		"extension": ["dress_view_", 4],
 		"location": "/Dresses/Dress 002/",
@@ -36,7 +40,9 @@
 	},
 	{
 		"name" : "Halter mini dress",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Dresses"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 003/",
 		"price" : 15900,
@@ -53,7 +59,9 @@
 	},
 	{
 		"name" : "Stretch mini dress with Bardot neckline",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Dresses"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 004/",
 		"price" : 13900,
@@ -70,7 +78,9 @@
 	},
 	{
 		"name" : "Strappy tulle dress",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Dresses"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["dress_view_", 6],
 		"location": "/Dresses/Dress 005/",
 		"price" : 15900,
@@ -87,7 +97,9 @@
 	},
 	{
 		"name" : "Ruffled mini dress with gathered detail",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Dresses"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["dress_view_", 5],
 		"location": "/Dresses/Dress 006/",
 		"price" : 17900,
@@ -105,7 +117,9 @@
 
 	{
 		"name" : "Tailored fit trousers with crossover waist",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Trousers"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 001/",
 		"price" : 25900,
@@ -122,7 +136,9 @@
 	},
 	{
 		"name" : "Plush barrel printed trousers",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Trousers"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 002/",
 		"price" : 19900,
@@ -139,7 +155,9 @@
 	},
 	{
 		"name" : "Printed baggy trousers",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Trousers"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 003/",
 		"price" : 23900,
@@ -156,7 +174,9 @@
 	},
 	{
 		"name" : "Linen blend balloon fit trousers with darts",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Trousers"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 004/",
 		"price" : 17900,
@@ -173,7 +193,9 @@
 	},
 	{
 		"name" : "Wide-leg trousers",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Trousers"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["trouser_view_", 7],
 		"location": "/Trousers/Trouser 005/",
 		"price" : 17900,
@@ -190,7 +212,9 @@
 	},
 	{
 		"name" : "Wide-leg trousers",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Trousers"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["trouser_view_", 5],
 		"location": "/Trousers/Trouser 006/",
 		"price" : 17900,
@@ -208,7 +232,9 @@
 
 	{
 		"name" : "Textured boho skirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Skirts"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 001/",
 		"price" : 17900,
@@ -225,7 +251,9 @@
 	},
 	{
 		"name" : "Box pleat mini skirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Skirts"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 002/",
 		"price" : 17900,
@@ -242,7 +270,9 @@
 	},
 	{
 		"name" : "Shimmery denim mini skirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Skirts"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 003/",
 		"price" : 19900,
@@ -259,7 +289,9 @@
 	},
 	{
 		"name" : "Ruffled mini skirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Skirts"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 004/",
 		"price" : 11900,
@@ -276,7 +308,9 @@
 	},
 	{
 		"name" : "Blonde lace ruffled mini skirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Skirts"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["skirt_view_", 6],
 		"location": "/Skirts/Skirt 005/",
 		"price" : 15900,
@@ -293,7 +327,9 @@
 	},
 	{
 		"name" : "Sequinned mini skirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "Skirts"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["skirt_view_", 5],
 		"location": "/Skirts/Skirt 006/",
 		"price" : 15900,
@@ -311,7 +347,9 @@
 
 	{
 		"name" : "Printed short sleeve T-shirt with ruffles",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "T-shirt"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 001/",
 		"price" : 6900,
@@ -328,7 +366,9 @@
 	},
 	{
 		"name" : "Printed short sleeve oversize T-shirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "T-shirt"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 002/",
 		"price" : 6900,
@@ -345,7 +385,9 @@
 	},
 	{
 		"name" : "Vampire Diaries short sleeve T-shirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "T-shirt"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 003/",
 		"price" : 6900,
@@ -362,7 +404,9 @@
 	},
 	{
 		"name" : "Short sleeve T-shirt with embroidery",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "T-shirt"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 004/",
 		"price" : 10900,
@@ -379,7 +423,9 @@
 	},
 	{
 		"name" : "Printed short sleeve oversize T-shirt",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "T-shirt"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 005/",
 		"price" : 6900,
@@ -396,12 +442,14 @@
 	},
 	{
 		"name" : "Short sleeve T-shirt with print",
+		"brand": "Bershka",
 		"category" : ["WOMEN", "Apparel", "T-shirt"],
+		"size": ["XS", "S", "M", "L", "XL"],
 		"extension": ["tshirt_view_", 5],
 		"location": "/T-shirts/T-shirt 006/",
 		"price" : 3900,
 		"currency": "AMD",
-		"Composition": 
+		"Composition":
 		{
 			"OUTER SHELL" : ["97% cotton","3% elastane","20% RCS CERTIFIED RECYCLED COTTON","77% OCS CERTIFIED ORGANICALLY GROWN COTTON"],
 			"LINING": [],
@@ -410,5 +458,121 @@
 		"Care": "Caring for your garments is a way to extend their useful life. Follow the care instructions and only wash your garments when necessary. Washing and drying our garments less often extends their lives and reduces water and energy use.",
 		"info": ["MACHINE WASH UP TO 30ºC/86ºF GENTLE CYCLE","DO NOT BLEACH","IRON UP TO 110ºC/230ºF","DO NOT TUMBLE DRY","DO NOT DRY CLEAN", "WASH INSIDE OUT", "IRON INSIDE OUT"],
 		"Origin": "We work with our suppliers to improve the traceability of our supply chain and of the facilities and processes that are used to manufacture our garments. We follow a principle of continual improvement and collaboration to protect human and labour rights and to improve the well-being of workers and their communities.\n\nThe origin of the production of this garment is the following:\n\nMade in Turkey"
+	},
+
+	{
+		"name" : "ELONGATED SHOULDER BAG",
+		"brand": "Zara",
+		"category" : ["WOMEN", "Bags", "Shoulder bags"],
+		"size": ["ONE SIZE"],
+		"extension": ["sbag_view_", 6],
+		"location": "/S-Bags/S-Bag 001/",
+		"price" : 9900,
+		"currency": "AMD",
+		"Composition":
+		{
+			"OUTER SHELL" : ["100% polyurethane"],
+			"LINING": ["90% cotton","10% polyester"],
+			"Description": "Elongated shoulder bag. Topstitched detail on the top. Adjustable buckle strap. Interior zip pocket. Zip closure with pull tab.\n\nHeight x Length x Width: 9 x 28 x 4 cm"
+		},
+		"Care": "Caring for your clothes is caring for the environment.\nSimple steps like cleaning your clothing with a dry cotton cloth or a soft brush, depending on the characteristics of the product, can help you care for it. Whenever possible, try to use products that are respectful of the environment. ",
+		"info": ["Do not wash", "Do not use bleach", "Do not iron", "Do not dry clean", "Do not tumble dry"],
+		"Origin": ""
+	},
+	{
+		"name" : "CRACKLED EFFECT BAG",
+		"brand": "Zara",
+		"category" : ["WOMEN", "Bags", "Shoulder bags"],
+		"size": ["ONE SIZE"],
+		"extension": ["sbag_view_", 6],
+		"location": "/S-Bags/S-Bag 002/",
+		"price" : 9900,
+		"currency": "AMD",
+		"Composition":
+		{
+			"OUTER SHELL" : ["100% polyurethane"],
+			"LINING": ["90% cotton","10% polyester"],
+			"Description": "Crackled effect shoulder bag. Shoulder strap. Interior zip pocket. Zip closure with pull tab.\n\nHeight x Length x Width: 11 x 27 x 3 cm."
+		},
+		"Care": "Caring for your clothes is caring for the environment.\nSimple steps like cleaning your clothing with a dry cotton cloth or a soft brush, depending on the characteristics of the product, can help you care for it. Whenever possible, try to use products that are respectful of the environment. ",
+		"info": ["Do not wash", "Do not use bleach", "Do not iron", "Do not dry clean", "Do not tumble dry"],
+		"Origin": ""
+	},
+	{
+		"name" : "WOVEN ELONGATED TOTE BAG",
+		"brand": "Zara",
+		"category" : ["WOMEN", "Bags", "Shoulder bags"],
+		"size": ["ONE SIZE"],
+		"extension": ["sbag_view_", 6],
+		"location": "/S-Bags/S-Bag 003/",
+		"price" : 16900,
+		"currency": "AMD",
+		"Composition":
+		{
+			"OUTER SHELL" : ["100% polyurethane"],
+			"LINING": ["100% polyester"],
+			"Description": "Woven tote bag. Interior zipped pocket. Shoulder strap. Zip closure.\n\nHeight x Length x Width: 22 x 47 x 14 cm. / 8.6 x 18.5 x 5.5\""
+		},
+		"Care": "Caring for your clothes is caring for the environment.\nSimple steps like cleaning your clothing with a dry cotton cloth or a soft brush, depending on the characteristics of the product, can help you care for it. Whenever possible, try to use products that are respectful of the environment. ",
+		"info": ["Do not wash", "Do not use bleach", "Do not iron", "Do not dry clean", "Do not tumble dry"],
+		"Origin": ""
+	},
+	{
+		"name" : "KNOTTED STITCHED BUCKET BAG",
+		"brand": "Zara",
+		"category" : ["WOMEN", "Bags", "Shoulder bags"],
+		"size": ["ONE SIZE"],
+		"extension": ["sbag_view_", 6],
+		"location": "/S-Bags/S-Bag 004/",
+		"price" : 12900,
+		"currency": "AMD",
+		"Composition":
+		{
+			"OUTER SHELL" : ["100% polyurethane"],
+			"LINING": ["100% polyester"],
+			"Description": "Bucket bag with knotted strap detail on the top. Contrast stitching. Adjustable shoulder strap. Removable zipped purse. Magnetic clasp closure.\n\nHeight x Length x Width: 27.5 x 24 x 12 cm. / 10.8 x 9.4 x 4.7\""
+		},
+		"Care": "Caring for your clothes is caring for the environment.\nSimple steps like cleaning your clothing with a dry cotton cloth or a soft brush, depending on the characteristics of the product, can help you care for it. Whenever possible, try to use products that are respectful of the environment. ",
+		"info": ["Do not wash", "Do not use bleach", "Do not iron", "Do not dry clean", "Do not tumble dry"],
+		"Origin": ""
+	},
+
+	{
+		"name" : "Carryall Leather Medium Tote Bag",
+		"brand": "Calvin Klein",
+		"category" : ["WOMEN", "Bags", "Tote bags"],
+		"size": ["ONE SIZE"],
+		"extension": ["tbag_view_", 4],
+		"location": "/T-Bags/T-Bag 001/",
+		"price" : 299,
+		"currency": "USD",
+		"Composition":
+		{
+			"OUTER SHELL" : [],
+			"LINING": [],
+			"Description": "Crafted from soft leather, this carryall bag features ample storage for a wide variety of everyday carry items. Designed with an open style interior with magnetic closures, dual zippered compartments along the sides and an optional crossbody strap."
+			},
+		"Care": "Caring for your clothes is caring for the environment.\nSimple steps like cleaning your clothing with a dry cotton cloth or a soft brush, depending on the characteristics of the product, can help you care for it. Whenever possible, try to use products that are respectful of the environment. ",
+		"info": ["Do not wash", "Do not use bleach", "Do not iron", "Do not dry clean", "Do not tumble dry"],
+		"Origin": ""
+	},
+	{
+		"name" : "Carryall Leather Medium Tote Bag",
+		"brand": "Calvin Klein",
+		"category" : ["WOMEN", "Bags", "Tote bags"],
+		"size": ["ONE SIZE"],
+		"extension": ["tbag_view_", 4],
+		"location": "/T-Bags/T-Bag 002/",
+		"price" : 299,
+		"currency": "USD",
+		"Composition":
+		{
+			"OUTER SHELL" : [],
+			"LINING": [],
+			"Description": "Crafted from soft leather, this carryall bag features ample storage for a wide variety of everyday carry items. Designed with an open style interior with magnetic closures, dual zippered compartments along the sides and an optional crossbody strap."
+		},
+		"Care": "Caring for your clothes is caring for the environment.\nSimple steps like cleaning your clothing with a dry cotton cloth or a soft brush, depending on the characteristics of the product, can help you care for it. Whenever possible, try to use products that are respectful of the environment. ",
+		"info": ["Do not wash", "Do not use bleach", "Do not iron", "Do not dry clean", "Do not tumble dry"],
+		"Origin": ""
 	}
 ]

@@ -90,11 +90,7 @@ class PageSquare extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        scrollController.animateTo(
-          0,
-          duration: Duration(milliseconds: 300), // or any duration you like
-          curve: Curves.easeInOut,               // or Curves.linear, etc.
-        );
+        if (pi.currentPage == index) return;
         ref.read(numberedPageIndicatorProvider.notifier).changeCurrentPage(index);
       },
       child: Container(
