@@ -2,7 +2,6 @@ import 'package:fashion_app/Pages/ProductsViewPage.dart';
 import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/NumberedPageIndicatorProvider.dart';
 import 'package:fashion_app/Provider/searchProvider.dart';
-import 'package:fashion_app/Utils/NumberedPageIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,7 +61,7 @@ class MenuPageState extends State<MenuPage> {
                           Text(
                             wList[i],
                             style: GoogleFonts.tenorSans(
-                              color: i == 3 ? Colors.transparent : Color(0xFF000000),
+                              color: i == 3 ? Colors.transparent : const Color(0xFF000000),
                               fontSize: 14 * sW,
                               letterSpacing: 3 * sW
                             ),
@@ -71,7 +70,7 @@ class MenuPageState extends State<MenuPage> {
                           Container(
                             width: 85 * sW,
                             height: (currentMenuIndex == i ? 3 : 1) * sH,
-                            color: currentMenuIndex == i ? Color(0xFFDD8560) : Color(0xFF888888),
+                            color: currentMenuIndex == i ? const Color(0xFFDD8560) : const Color(0xFF888888),
                           ),
                           if(currentMenuIndex != i)...[
                             SizedBox(height: 1 * sH,),
@@ -122,7 +121,7 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
 
     final style = GoogleFonts.tenorSans(
         fontSize: 16 * sW,
-        color: Color(0xFF333333)
+        color: const Color(0xFF333333)
     );
 
     debugPrint(subCatNames.toString());
@@ -138,7 +137,7 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
                 title: Text("No Items", style: style,),
               ),
 
-              Info()
+              const Info()
             ],
           ),
         ),
@@ -161,10 +160,10 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
                         ExpansionTile(
                           trailing: AnimatedRotation(
                             turns: isExpandedList[i] ? 0.5 : 0.0, // 0.5 = 180 degrees
-                            duration: Duration(milliseconds: 250),
+                            duration: const Duration(milliseconds: 250),
                             child: Icon(
                               Icons.expand_more,
-                              color: Color(0xFF555555),
+                              color: const Color(0xFF555555),
                               size: 24 * sW,
                             ),
                           ),
@@ -201,7 +200,7 @@ class _DrawMenuState extends ConsumerState<DrawMenu> {
                 )
               ),
 
-              Info()
+              const Info()
             ],
           ),
         ),
@@ -227,7 +226,7 @@ class SubMenuDraw extends ConsumerWidget {
           debugPrint(ProductsViewPage.isProductsViewPageActive.toString());
           if (!ProductsViewPage.isProductsViewPageActive){
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ProductsViewPage(),),
+              MaterialPageRoute(builder: (context) => const ProductsViewPage(),),
             );
           }
           else{
@@ -260,7 +259,7 @@ class Info extends StatelessWidget {
         children: [
           Container(
             height: 1 * sW,
-            color: Color(0xFF555555),
+            color: const Color(0xFF555555),
           ),
 
           Padding(
@@ -277,7 +276,7 @@ class Info extends StatelessWidget {
                   '   +(000) 00-00-00',
                   style: GoogleFonts.tenorSans(
                       fontSize: 16 * sW,
-                      color: Color(0xFF555555)
+                      color: const Color(0xFF555555)
                   ),
                 )
               ],
@@ -298,7 +297,7 @@ class Info extends StatelessWidget {
                   '   Store location',
                   style: GoogleFonts.tenorSans(
                       fontSize: 16 * sW,
-                      color: Color(0xFF555555)
+                      color: const Color(0xFF555555)
                   ),
                 )
               ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TextOnScreen extends StatelessWidget {
   const TextOnScreen({super.key, required this.imgPath, required this.textOnImage, required this.sW});
@@ -33,7 +32,7 @@ class TextOnScreen extends StatelessWidget {
                       ..style = PaintingStyle.stroke
                       ..strokeWidth = 1
                       ..color = Colors.black,
-                    shadows: [
+                    shadows: const [
                       Shadow(
                         offset: Offset(2, 2),
                         blurRadius: 3,
@@ -48,7 +47,7 @@ class TextOnScreen extends StatelessWidget {
                   textOnImage.toUpperCase(),
                   style: TextStyle(
                     fontSize: 42 * sW,
-                    color: Color(0xFF555555).withAlpha(200),
+                    color: const Color(0xFF555555).withAlpha(200),
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
                   ),

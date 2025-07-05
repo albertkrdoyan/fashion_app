@@ -1,4 +1,5 @@
 import 'package:fashion_app/Models/Products.dart';
+import 'package:fashion_app/Pages/ProductDetailsPage.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
@@ -84,50 +85,58 @@ class JustForYouSection extends ConsumerWidget{
         controller: justForYouSectionController,
         itemCount: count,
         padding: EdgeInsets.symmetric(horizontal: 16 * sW),
-        itemBuilder: (context, index) => SizedBox(
-            width: 255 * sW,
-            key: ValueKey(index),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  key: ValueKey(index),
-                  width: 255 * sW,
-                  height: 280 * sW,
-                  child: ItemShow(
+        itemBuilder: (context, index) => 
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => ProductDetailsPage(product: newList[index]),
+              ));
+            },
+            child: SizedBox(
+              width: 255 * sW,
+              key: ValueKey(index),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
                     key: ValueKey(index),
-                    product: newList[index],
-                    sW: sW,
-                    imgIndexes: List<int>.generate(
-                      newList[index].imgCount - 2, (index_) => index_ + 1,
+                    width: 255 * sW,
+                    height: 280 * sW,
+                    child: ItemShow(
+                      key: ValueKey(index),
+                      product: newList[index],
+                      sW: sW,
+                      imgIndexes: List<int>.generate(
+                        newList[index].imgCount - 2, (index_) => index_ + 1,
+                      ),
+                      padding: 255 * sW * 0.01,
                     ),
-                    padding: 255 * sW * 0.01,
                   ),
-                ),
-
-                Text(
-                  (newList[index].name.length < 44
-                      ? newList[index].name
-                      : '${newList[index].name.substring(0, 41)}..'),
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.tenorSans(
-                      fontSize: 18 * sW,
-                      color: Color(0xFF333333)
+            
+                  Text(
+                    (newList[index].name.length < 44
+                        ? newList[index].name
+                        : '${newList[index].name.substring(0, 41)}..'),
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.tenorSans(
+                        fontSize: 18 * sW,
+                        color: const Color(0xFF333333)
+                    ),
                   ),
-                ),
-
-                Text(
-                  '${newList[index].price} ${newList[index].currency}',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.tenorSans(
-                      fontSize: 22 * sW,
-                      color: Color(0xFFDD8560),
-                      fontWeight: FontWeight.w500
-                  ),
-                )
-              ],
-            )
-        ),
+            
+                  Text(
+                    '${newList[index].price} ${newList[index].currency}',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.tenorSans(
+                        fontSize: 22 * sW,
+                        color: const Color(0xFFDD8560),
+                        fontWeight: FontWeight.w500
+                    ),
+                  )
+                ],
+              )
+                    ),
+          ),
         separatorBuilder: (context, index) => SizedBox(width: 11 * sW,),
       ),
     );

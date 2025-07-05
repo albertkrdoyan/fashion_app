@@ -35,7 +35,7 @@ class _ItemShowState extends State<ItemShow> {
               width: 25 * widget.sW,
               child: IconButton(
                 padding: EdgeInsets.zero,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios_new,
                   color: Colors.white,
                   shadows: [
@@ -65,7 +65,7 @@ class _ItemShowState extends State<ItemShow> {
               width: 25 * widget.sW,
               child: IconButton(
                 padding: EdgeInsets.zero,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.white,
                   shadows: [

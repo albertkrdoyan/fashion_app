@@ -47,7 +47,7 @@ class NumberedPageIndicator extends ConsumerWidget {
                     '...',
                     style: GoogleFonts.tenorSans(
                       fontSize: 16 * sW,
-                      color: Color(0xFF555555)
+                      color: const Color(0xFF555555)
                     ),
                   ),
                 )
@@ -64,7 +64,7 @@ class NumberedPageIndicator extends ConsumerWidget {
                     '...',
                     style: GoogleFonts.tenorSans(
                         fontSize: 16 * sW,
-                        color: Color(0xFF555555)
+                        color: const Color(0xFF555555)
                     ),
                   ),
                 ),
@@ -97,13 +97,13 @@ class PageSquare extends ConsumerWidget {
         margin: EdgeInsets.symmetric(horizontal: 3 * sW),
         height: 30 * sW,
         width: 30 * sW,
-        color: pi.currentPage == index ? Color(0xFF333333) : Color(0xFFDEDEDE),
+        color: pi.currentPage == index ? const Color(0xFF333333) : const Color(0xFFDEDEDE),
         child: Center(
             child: Text(
               '${index + 1}',
               style: GoogleFonts.tenorSans(
                   fontSize: 16 * sW,
-                  color: pi.currentPage == index ? Colors.white : Color(0xFF555555)
+                  color: pi.currentPage == index ? Colors.white : const Color(0xFF555555)
               ),
             )
         ),

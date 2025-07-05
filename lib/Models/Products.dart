@@ -1,4 +1,5 @@
 class Product{
+  final int iD;
   final String name;
   final String brand;
   final List<String> category;
@@ -18,6 +19,7 @@ class Product{
   static Map<String, Map<String, List<String>>> categories = {};
 
   Product({
+    required this.iD,
     required this.name,
     required this.brand,
     required this.category,
@@ -34,7 +36,7 @@ class Product{
     required this.info,
     required this.origin});
 
-  factory Product.fromJson(Map<String, dynamic> json){
+  factory Product.fromJson(Map<String, dynamic> json, int id){
     final catList = List<String>.from(json['category']);
     // if (!Categories[catList[0]]?[catList[1]]!.contains(catList[2]))
 
@@ -49,6 +51,7 @@ class Product{
     }
 
     return Product(
+      iD: id,
       name: json['name'],
       brand: json['brand'],
       category: catList,

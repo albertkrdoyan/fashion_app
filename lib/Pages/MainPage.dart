@@ -3,9 +3,7 @@ import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Pages/PageUtils/JustForYouScroll.dart';
 import 'package:fashion_app/Pages/PageUtils/NewArrivalScroll.dart';
 import 'package:fashion_app/Pages/ProductsViewPage.dart';
-import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
-import 'package:fashion_app/Provider/categoriesProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:fashion_app/Utils/TextOnImage.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +21,8 @@ class MainPage extends ConsumerWidget{
   MenuPage? menuPage;
   GlobalKey<MenuPageState> menuPageKey = GlobalKey<MenuPageState>();
 
+  MainPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double sW = MediaQuery.of(context).size.width / 375;
@@ -36,13 +36,25 @@ class MainPage extends ConsumerWidget{
 
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ref.read(productCatalogProvider.notifier).updateList(data['catalog']);
-          _readCategories(ref);
+          ref.read(productCategoriesProvider.notifier).update(ref.read(productCatalogProvider));
+
+          // Set<String> careMethods = {};
+          //
+          // for (var item in ref.read(productCatalogProvider)){
+          //   for (int i = 0; i < item.info.length; ++i){
+          //     careMethods.add(item.info[i].toUpperCase());
+          //   }
+          // }
+          //
+          // for (var method in careMethods){
+          //   debugPrint(method);
+          // }
         });
 
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Color(0xFFE7EAEF),
+            backgroundColor: const Color(0xFFE7EAEF),
             centerTitle: true,
             toolbarHeight: 60 * sW,
             title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
@@ -55,7 +67,7 @@ class MainPage extends ConsumerWidget{
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return MenuPage();
+                        return const MenuPage();
                       },
                     )
                   );
@@ -111,7 +123,7 @@ class MainPage extends ConsumerWidget{
                           MaterialButton(
                             onPressed: (){
                               Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) => ProductsViewPage(),),
+                                MaterialPageRoute(builder: (context) => const ProductsViewPage(),),
                               );
                             },
                             color: Colors.black.withAlpha(125),
@@ -215,7 +227,7 @@ class MainPage extends ConsumerWidget{
                           child: MasonryGridView.custom(
                             crossAxisSpacing: 8 * sW,
                             scrollDirection: Axis.horizontal,
-                            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2
                             ),
                             childrenDelegate: SliverChildListDelegate([
@@ -244,7 +256,7 @@ class MainPage extends ConsumerWidget{
 
                   // open fashion
                   Container(
-                    color: Color(0xFFF2F2F2),
+                    color: const Color(0xFFF2F2F2),
                     width: 375 * sW,
                     height: 450 * sW,
                     child: Column(
@@ -271,7 +283,7 @@ class MainPage extends ConsumerWidget{
                             style: GoogleFonts.tenorSans(
                                 fontSize: 14 * sW,
                                 letterSpacing: 1 * sW,
-                                color: Color(0xFF555555)
+                                color: const Color(0xFF555555)
                             ),
                           ),
                         ),
@@ -294,7 +306,7 @@ class MainPage extends ConsumerWidget{
                           width: 375 * sW,
                           height: 180 * sW,
                           child: MasonryGridView.count(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: openFashionList.length,
                             crossAxisCount: 2,
                             itemBuilder: (context, index) => SizedBox(
@@ -316,7 +328,7 @@ class MainPage extends ConsumerWidget{
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.tenorSans(
                                         fontSize: 13 * sW,
-                                        color: Color(0xFF555555)
+                                        color: const Color(0xFF555555)
                                     ),
                                   )
                                 ],
@@ -384,7 +396,7 @@ class MainPage extends ConsumerWidget{
                           height: 343 * sW,
                           width: 375 * sW,
                           child: MasonryGridView.count(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: followUsList.length,
                             crossAxisSpacing: 14 * sW,
                             mainAxisSpacing: 15 * sW,
@@ -411,7 +423,7 @@ class MainPage extends ConsumerWidget{
                                               ],
                                               begin: Alignment.topCenter,
                                               end: Alignment.bottomCenter,
-                                              stops: [0.65, 0.85, 1]
+                                              stops: const [0.65, 0.85, 1]
                                           )
                                       ),
                                     ),
@@ -441,14 +453,14 @@ class MainPage extends ConsumerWidget{
                   SizedBox(height: 18 * sW,),
 
                   // bottom
-                  BottomInfo()
+                  const BottomInfo()
                 ],
               ),
             ),
           ),
         );
       },
-      loading: () => Text("Loading..."),
+      loading: () => const Text("Loading..."),
       error: (err, stack) => Text('Error: $err'),
     );
   }
@@ -479,29 +491,6 @@ class MainPage extends ConsumerWidget{
     Future.delayed(Duration(seconds: duration ~/ 5), () {
       _setTimerToMainPage(count, duration);
     });
-  }
-
-  void _readCategories(WidgetRef ref) {
-    if (ref.read(categoriesProvider).length > 1) return;
-
-    List<List<dynamic>> categories = [];
-    List<Product> catalog = ref.read(productCatalogProvider);
-    bool skip = false;
-
-    for (int i = 0; i < catalog.length; ++i){
-      skip = false;
-
-      for (int j = 0; j < categories.length; ++j){
-        if (categories[j][0] == catalog[i].category.last){
-          skip = true;
-          break;
-        }
-      }
-
-      if (!skip) categories.add([catalog[i].category.last, false]);
-    }
-
-    ref.read(categoriesProvider.notifier).changeData(categories);
   }
 }
 
@@ -585,7 +574,7 @@ class BottomInfo extends StatelessWidget {
                       style: GoogleFonts.tenorSans(
                           fontSize: 18 * sW,
                           letterSpacing: 0,
-                          color: Color(0xFF333333),
+                          color: const Color(0xFF333333),
                           height: 1.5 * sW
                       ),
                     ),
@@ -614,7 +603,7 @@ class BottomInfo extends StatelessWidget {
                         style: GoogleFonts.tenorSans(
                           fontSize: 16 * sW,
                           letterSpacing: 0,
-                          color: Color(0xFF000000),
+                          color: const Color(0xFF000000),
                         ),
                       ),
 
@@ -623,7 +612,7 @@ class BottomInfo extends StatelessWidget {
                         style: GoogleFonts.tenorSans(
                           fontSize: 16 * sW,
                           letterSpacing: 0,
-                          color: Color(0xFF000000),
+                          color: const Color(0xFF000000),
                         ),
                       ),
 
@@ -632,7 +621,7 @@ class BottomInfo extends StatelessWidget {
                         style: GoogleFonts.tenorSans(
                           fontSize: 16 * sW,
                           letterSpacing: 0,
-                          color: Color(0xFF000000),
+                          color: const Color(0xFF000000),
                         ),
                       )
                     ],
@@ -646,7 +635,7 @@ class BottomInfo extends StatelessWidget {
           Container(
             height: 45 * sW,
             width: 375 * sW,
-            color: Color(0xFFC4C4C4),
+            color: const Color(0xFFC4C4C4),
             child: Center(
               // padding: EdgeInsets.only(bottom: 12.5 * sW),
               // alignment: Alignment.center,
@@ -658,7 +647,7 @@ class BottomInfo extends StatelessWidget {
                 style: GoogleFonts.tenorSans(
                     fontSize: 12 * sW,
                     letterSpacing: 0,
-                    color: Color(0xFF555555)
+                    color: const Color(0xFF555555)
                 ),
               ),
             ),

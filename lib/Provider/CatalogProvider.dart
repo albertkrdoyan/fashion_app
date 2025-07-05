@@ -8,10 +8,16 @@ class ProductCatalogProvider extends Notifier<List<Product>>{
   }
 
   void updateList(List<dynamic> catalog) {
-    state = catalog
-        .whereType<Map<String, dynamic>>() // Ensures each item is a Map
-        .map((json) => Product.fromJson(json))
-        .toList();
+    List<Product> result = [];
+
+    for (int i = 0; i < catalog.length; ++i) {
+      var json = catalog[i];
+      if (json is Map<String, dynamic>) {
+        result.add(Product.fromJson(json, i + 1));
+      }
+    }
+
+    state = result;
   }
 
   List<Product> filterByCategory(String category){
@@ -45,5 +51,50 @@ class ProductCatalogProvider extends Notifier<List<Product>>{
     return result;
   }
 }
-
 final productCatalogProvider = NotifierProvider<ProductCatalogProvider, List<Product>>(() => ProductCatalogProvider(),);
+
+
+class CategoriesProvider extends Notifier<List<List<String>>>{
+  @override
+  List<List<String>> build() {
+    return [];
+  }
+
+  void update(List<Product> listOfProducts){
+    Set<KeyList> categories = {};
+
+    for (int i = 0; i < listOfProducts.length; ++i){
+      categories.add(KeyList(listOfProducts[i].category));
+    }
+
+    for (var list in categories){
+      state.add(list.values);
+    }
+
+    state = [...state];
+  }
+}
+final productCategoriesProvider = NotifierProvider<CategoriesProvider, List<List<String>>>(() => CategoriesProvider(),);
+
+
+class KeyList {
+  final List<String> values;
+
+  KeyList(this.values);
+
+  @override
+  bool operator ==(Object other) =>
+      other is KeyList &&
+          _listEquals(values, other.values);
+
+  @override
+  int get hashCode => values.fold(0, (h, v) => h ^ v.hashCode);
+
+  bool _listEquals(List<String> a, List<String> b) {
+    if (a.length != b.length) return false;
+    for (int i = 0; i < a.length; ++i) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
+  }
+}

@@ -1,7 +1,8 @@
+import 'package:fashion_app/Pages/ProductDetailsPage.dart';
 import 'package:fashion_app/Pages/ProductsViewPage.dart';
 import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
-import 'package:fashion_app/Provider/categoriesProvider.dart';
+import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,9 +19,11 @@ class NewArrivalScroll extends ConsumerStatefulWidget {
 }
 
 class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
+  int selectedCategoryIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    List categories = ref.watch(categoriesProvider);
+    List<List<String>> categories = ref.watch(productCategoriesProvider);
 
     return SizedBox(
       height: 800 * widget.sW,
@@ -56,15 +59,11 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
               scrollDirection: Axis.horizontal,
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                for(int i = 0; i < categories.length; ++i)...[
+                for(int i = 0; i < (categories.length > 4 ? 4 : categories.length); ++i)...[
                   GestureDetector(
                     onTap: () {
-                      if (categories[i][1]) return;
-
-                      for(int i2 = 0; i2 < categories.length; ++i2){
-                        categories[i2][1] = false;
-                      }
-                      categories[i][1] = true;
+                      if (i == selectedCategoryIndex) return;
+                      selectedCategoryIndex = i;
 
                       setState(() {});
                     },
@@ -74,9 +73,9 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            categories[i][0].toString(),
+                            '${categories[i][0][0]}/${categories[i][2]}',
                             style: GoogleFonts.tenorSans(
-                                color: categories[i][1] == true ? Color(0xFF212806) : Color(0xFF888888),
+                                color: i == selectedCategoryIndex ? const Color(0xFF212806) : const Color(0xFF888888),
                                 fontSize: 20 * widget.sW
                             ),
                           ),
@@ -84,7 +83,7 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
                           Text(
                             '◆',
                             style: TextStyle(
-                              color: categories[i][1] ? Color(0xFFDD8560) : Colors.transparent,
+                              color: i == selectedCategoryIndex ? const Color(0xFFDD8560) : Colors.transparent,
                             ),
                           )
                         ],
@@ -98,20 +97,22 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
 
           // SizedBox(height: widget.sW * 0.025,),
 
-          Expanded(
-            child: ItemShowByCategory(
-              key: ValueKey(widget.key),
-              category: getSelectedCategory(categories),
-              sW: widget.sW,
+          if (categories.isNotEmpty)...[
+            Expanded(
+              child: ItemShowByCategory(
+                key: ValueKey(widget.key),
+                category: categories[selectedCategoryIndex],
+                sW: widget.sW,
+              ),
             ),
-          ),
-
-          // SizedBox(height: 25 * widget.sW,),
+          ],
 
           MaterialButton(
             onPressed: (){
+              final searchString = "${categories[selectedCategoryIndex][0]} / ${categories[selectedCategoryIndex][1]} / ${categories[selectedCategoryIndex][2]}";
+              ref.read(searchKeywordsProvider.notifier).addToKeywords([searchString, true]);
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ProductsViewPage(),),
+                MaterialPageRoute(builder: (context) => const ProductsViewPage(),),
               );
             },
             child: SizedBox(
@@ -129,7 +130,7 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
                       fontWeight: FontWeight.w300
                     )
                   ),
-                  Icon(Icons.arrow_forward,)
+                  const Icon(Icons.arrow_forward,)
                 ],
               ),
             )
@@ -138,19 +139,12 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
       ),
     );
   }
-
-  String getSelectedCategory(List categories){
-    for (int i = 0; i < categories.length; ++i){
-      if (categories[i][1]) return categories[i][0];
-    }
-    return "";
-  }
 }
 
 class ItemShowByCategory extends ConsumerStatefulWidget {
   const ItemShowByCategory({super.key, required this.category, required this.sW});
 
-  final String category;
+  final List<String> category;
   final double sW;
 
   @override
@@ -173,54 +167,61 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
           crossAxisCount: 2,
           crossAxisSpacing: 13 * widget.sW,
           mainAxisSpacing: 11 * widget.sW,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return SizedBox(
-                key: ValueKey(index),
-                height: 265 * widget.sW,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        key: ValueKey(index),
-                        decoration: BoxDecoration(
-                          border: BoxBorder.all(
-                              color: Color(0xFF888888).withAlpha(75),
-                              width: 1
-                          ),
-                        ),
-                        height: 200 * widget.sW,
-                        width: 165 * widget.sW,
-                        child: ItemShow(
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => ProductDetailsPage(product: catItemsList[index]),
+                ));
+              },
+              child: SizedBox(
+                  key: ValueKey(index),
+                  height: 265 * widget.sW,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
                           key: ValueKey(index),
-                          product: catItemsList[index],
-                          sW: widget.sW,
-                          imgIndexes: [catItemsList[index].imgCount - 1, catItemsList[index].imgCount],
-                          padding: 165 * widget.sW * 0.01,
-                        )
-                    ),
-
-                    Text(
-                      (catItemsList[index].name.length < 44
-                          ? catItemsList[index].name
-                          : '${catItemsList[index].name.toString().substring(0, 41)}..'),
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.tenorSans(
-                          fontSize: 14 * widget.sW,
-                          color: Color(0xFF333333)
+                          decoration: BoxDecoration(
+                            border: BoxBorder.all(
+                                color: const Color(0xFF888888).withAlpha(75),
+                                width: 1
+                            ),
+                          ),
+                          height: 200 * widget.sW,
+                          width: 165 * widget.sW,
+                          child: ItemShow(
+                            key: ValueKey(index),
+                            product: catItemsList[index],
+                            sW: widget.sW,
+                            imgIndexes: [catItemsList[index].imgCount - 1, catItemsList[index].imgCount],
+                            padding: 165 * widget.sW * 0.01,
+                          )
                       ),
-                    ),
 
-                    Text(
-                      '${catItemsList[index].price} ${catItemsList[index].currency}',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.tenorSans(
-                          fontSize: 16 * widget.sW,
-                          color: Color(0xFFDD8560)
+                      Text(
+                        (catItemsList[index].name.length < 44
+                            ? catItemsList[index].name
+                            : '${catItemsList[index].name.toString().substring(0, 41)}..'),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.tenorSans(
+                            fontSize: 14 * widget.sW,
+                            color: const Color(0xFF333333)
+                        ),
                       ),
-                    )
-                  ],
-                )
+
+                      Text(
+                        '${catItemsList[index].price} ${catItemsList[index].currency}',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.tenorSans(
+                            fontSize: 16 * widget.sW,
+                            color: const Color(0xFFDD8560)
+                        ),
+                      )
+                    ],
+                  )
+              ),
             );
           },
         ),
@@ -231,16 +232,26 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
   List<Product> listByCategory(){
     List<Product> itemList = ref.read(productCatalogProvider);
 
-    if (widget.category == "All") return itemList;
+    if (widget.category[0] == "All") return itemList;
 
     List<Product> catItemsList = [];
 
     for (int i = 0; i < itemList.length; ++i){
-      if (itemList[i].category.last == widget.category){
+      if (areSame(itemList[i].category, widget.category)){
         catItemsList.add(itemList[i]);
       }
     }
 
     return catItemsList;
+  }
+
+  bool areSame(List<String> l1, List<String> l2){
+    if (l1.length != l2.length) return false;
+
+    for (int i = 0; i < l1.length; ++i){
+      if (l1[i] != l2[i]) return false;
+    }
+
+    return true;
   }
 }

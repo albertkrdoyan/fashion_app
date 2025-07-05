@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DrawPageIndicator extends StatelessWidget {
-  const DrawPageIndicator({super.key, required this.controller, required this.size, required this.count});
+  const DrawPageIndicator({super.key, required this.controller, required this.size, required this.count, this.selectedItemColor = Colors.white});
 
   final PageController controller;
   final double size;
   final int count;
+  final Color selectedItemColor;
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +23,17 @@ class DrawPageIndicator extends StatelessWidget {
             rotationAngle: 45,
             dotBorder: DotBorder(
               width: 1,
-              color: Colors.white,
+              color: selectedItemColor,
             ),
             width: size,
             height: size
           ),
           activeDotDecoration: DotDecoration(
-            color: Colors.white,
+            color: selectedItemColor,
             rotationAngle: 45,
             dotBorder: DotBorder(
               width: 1,
-              color: Colors.white
+              color: selectedItemColor
             ),
             width: size,
             height: size
