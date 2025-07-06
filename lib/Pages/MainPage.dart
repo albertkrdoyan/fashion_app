@@ -1,14 +1,19 @@
 import 'dart:async';
+import 'package:fashion_app/Models/svgImages.dart';
+import 'package:fashion_app/Pages/CartPage.dart';
 import 'package:fashion_app/Pages/MenuPage.dart';
+import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/PageUtils/JustForYouScroll.dart';
 import 'package:fashion_app/Pages/PageUtils/NewArrivalScroll.dart';
 import 'package:fashion_app/Pages/ProductsViewPage.dart';
+import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:fashion_app/Utils/TextOnImage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Provider/jsonProvider.dart';
 
@@ -60,7 +65,10 @@ class MainPage extends ConsumerWidget{
             title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
             leading: Builder(
               builder: (context) => GestureDetector(
-                child: Image.asset('lib/Images/HomePage/Logo/Menu.png'),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 15 * sW),
+                  child: SvgPicture.string(menuSVG,),
+                ),
                 onTap: () {
                   // menuPage ??= MenuPage(key: menuPageKey,);
 
@@ -77,13 +85,10 @@ class MainPage extends ConsumerWidget{
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 16 * sW),
-                child: Image.asset('lib/Images/HomePage/Logo/Search.png',),
+                child: SvgPicture.string(searchSVG, height: 25 * sW, width: 20 * sW,)
               ),
               // SizedBox(width: screenWidth * 0.04,),
-              Padding(
-                padding: EdgeInsets.only(right: 23 * sW),
-                child: Image.asset('lib/Images/HomePage/Logo/ShoppingBag.png'),
-              )
+              const CartPageLoader()
             ],
           ),
           body: SafeArea(

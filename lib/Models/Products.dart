@@ -15,6 +15,7 @@ class Product{
   final String care;
   final List<String> info;
   final String origin;
+  final int selectedSize = 0;
 
   static Map<String, Map<String, List<String>>> categories = {};
 

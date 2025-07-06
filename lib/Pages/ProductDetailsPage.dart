@@ -1,14 +1,17 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Models/svgImages.dart';
+import 'package:fashion_app/Pages/CartPage.dart';
 import 'package:fashion_app/Pages/MainPage.dart';
+import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
+import 'package:fashion_app/Pages/PageUtils/ProductSizeSelection.dart';
+import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:insta_image_viewer/insta_image_viewer.dart';
 
-class ProductDetailsPage extends StatelessWidget {
+class ProductDetailsPage extends ConsumerWidget {
   ProductDetailsPage({super.key, required this.product});
 
   final Product product;
@@ -16,7 +19,7 @@ class ProductDetailsPage extends StatelessWidget {
   final imagesController = PageController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double sW = MediaQuery.sizeOf(context).width / 375;
 
     debugPrint('_ProductDetailsPageState');
@@ -28,11 +31,8 @@ class ProductDetailsPage extends StatelessWidget {
         centerTitle: true,
         toolbarHeight: 60 * sW,
         title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 23 * sW),
-            child: Image.asset('lib/Images/HomePage/Logo/ShoppingBag.png'),
-          )
+        actions: const [
+          CartPageLoader()
         ],
       ),
       body: SafeArea(
@@ -85,6 +85,7 @@ class ProductDetailsPage extends StatelessWidget {
                               ),
                             ),
 
+                            SizedBox(height: 10 * sW,),
                             // indicator
                             DrawPageIndicator(controller: imagesController, size: 6.5 * sW, count: product.imgCount, selectedItemColor: Colors.grey,),
 
@@ -128,96 +129,9 @@ class ProductDetailsPage extends StatelessWidget {
 
                             SizedBox(height: 10 * sW,),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                // sizes
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Size: ',
-                                      style: GoogleFonts.tenorSans(
-                                          fontSize: 14 * sW,
-                                          color: const Color(0xFF555555)
-                                      ),
-                                    ),
-
-                                    if (product.size.length == 1)...[
-                                      Container(
-                                        height: 28 * sW,
-                                        width: 110 * sW,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8 * sW),
-                                            border: Border.all(
-                                                width: 1 * sW,
-                                                color: const Color(0xFFE3E3E3)
-                                            )
-                                        ),
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            product.size[0],
-                                            style: GoogleFonts.tenorSans(
-                                                fontSize: 16 * sW,
-                                                color: const Color(0xFF555555)
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ]else...[
-                                      for (int i = 0; i < product.size.length; ++i)...[
-                                        Container(
-                                          margin: EdgeInsets.only(right: 6 * sW),
-                                          height: 28 * sW,
-                                          width: 28 * sW,
-                                          decoration: BoxDecoration(
-                                            // borderRadius: BorderRadius.circular(8 * sW),
-                                              border: Border.all(
-                                                width: 1 * sW,
-                                                color: const Color(0xFFE3E3E3),
-                                              ),
-                                              shape: BoxShape.circle
-                                          ),
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              product.size[i],
-                                              style: GoogleFonts.tenorSans(
-                                                  fontSize: 10 * sW,
-                                                  color: const Color(0xFF555555),
-                                                  fontWeight: FontWeight.bold
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ]
-                                    ]
-                                  ],
-                                ),
-                                SizedBox(width: 15 * sW,),
-                                Container(
-                                  color: Colors.black,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(width: 10 * sW,),
-                                      Icon(Icons.add_shopping_cart_sharp, color: Colors.white, size: 28 * sW,),
-                                      SizedBox(width: 10 * sW,),
-                                      Text(
-                                        " ADD",
-                                        style: GoogleFonts.tenorSans(
-                                          color: Colors.white,
-                                          fontSize: 14 * sW
-                                        ),
-                                      ),
-                                      SizedBox(width: 10 * sW,),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-
-
+                            ProductSizeSelection(
+                              product: product,
+                            )
                           ],
                         ),
                       ),
@@ -600,7 +514,7 @@ class _ImageViewFullScreenState extends State<ImageViewFullScreen> {
                   margin: EdgeInsets.only(bottom: 20 * sW),
                   padding: EdgeInsets.symmetric(horizontal: 12 * sW, vertical: 4 * sW),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withAlpha(128),
                     borderRadius: BorderRadius.circular(8 * sW),
                   ),
                   child: Text(

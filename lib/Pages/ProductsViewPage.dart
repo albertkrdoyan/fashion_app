@@ -1,7 +1,11 @@
+import 'package:fashion_app/Models/svgImages.dart';
+import 'package:fashion_app/Pages/CartPage.dart';
 import 'package:fashion_app/Pages/MainPage.dart';
 import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Models/Products.dart';
+import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/ProductDetailsPage.dart';
+import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/NumberedPageIndicatorProvider.dart';
 import 'package:fashion_app/Provider/searchProvider.dart';
@@ -9,6 +13,7 @@ import 'package:fashion_app/Utils/ItemShow.dart';
 import 'package:fashion_app/Utils/NumberedPageIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductsViewPage extends ConsumerWidget {
@@ -45,7 +50,10 @@ class ProductsViewPage extends ConsumerWidget {
           ),
           leading: Builder(
             builder: (context) => GestureDetector(
-              child: Image.asset('lib/Images/HomePage/Logo/Menu.png'),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15 * sW),
+                child: SvgPicture.string(menuSVG),
+              ),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -60,12 +68,10 @@ class ProductsViewPage extends ConsumerWidget {
           actions: [
             Padding(
               padding: EdgeInsets.only(right: 16 * sW),
-              child: Image.asset('lib/Images/HomePage/Logo/Search.png',),
+              child: SvgPicture.string(searchSVG, height: 25 * sW, width: 20 * sW,)
             ),
-            Padding(
-              padding: EdgeInsets.only(right: 23 * sW),
-              child: Image.asset('lib/Images/HomePage/Logo/ShoppingBag.png'),
-            )
+            // SizedBox(width: screenWidth * 0.04,),
+            const CartPageLoader()
           ],
         ),
         body: SafeArea(

@@ -292,3 +292,17 @@ final Map<String, String> careSGVs = {
   <?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 122.47" style="enable-background:new 0 0 122.88 122.47" xml:space="preserve"><g><path d="M65.45,2.3l21.31,36.28l27.47-26.15c1.65-1.57,4.27-1.51,5.84,0.15c1.57,1.65,1.51,4.27-0.15,5.84L91.05,45.89l31.26,53.22 c1.17,1.99,0.5,4.55-1.49,5.71c-0.66,0.39-1.39,0.57-2.11,0.57v0.02h-12.35l10.44,9.94c1.65,1.57,1.72,4.19,0.15,5.84 c-1.57,1.65-4.19,1.72-5.84,0.15l-16.72-15.92H28.52l-16.72,15.92c-1.65,1.57-4.27,1.51-5.84-0.15c-1.57-1.65-1.51-4.27,0.15-5.84 l10.44-9.94H4.19c-2.31,0-4.19-1.88-4.19-4.19c0-0.87,0.27-1.68,0.72-2.35l31.3-52.81L2.98,18.41c-1.65-1.57-1.72-4.19-0.15-5.84 c1.57-1.65,4.19-1.72,5.84-0.15l27.68,26.34L58.11,2.06c1.17-1.99,3.74-2.65,5.73-1.47C64.55,1.01,65.1,1.61,65.45,2.3L65.45,2.3z M85.58,97.03L61.45,74.06L37.32,97.03H85.58L85.58,97.03z M55.46,68.36L38.24,51.98L11.54,97.03h13.81L55.46,68.36L55.46,68.36z M42.56,44.69l18.88,17.98l19.09-18.18L61.7,12.4L42.56,44.69L42.56,44.69z M67.44,68.36l30.12,28.67h13.85L84.84,51.8L67.44,68.36 L67.44,68.36z"/></g></svg>
   ''',
 };
+
+final String menuSVG = '''
+<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 12H15M3 6H21M3 18H21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+''';
+
+final shoppingBagSVG = '''
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.39999 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.50999C3.99999 22 3.23999 19.99 3.53999 17.53L4.44 10.03C4.66 8.09 4.99999 6.5 8.39999 6.5Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M20.41 17.03H8" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+''';
+
+final searchSVG = '''
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="style=linear"> <g id="search-broken"> <path id="vector" d="M18.5 18.5L21 21" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path> <circle id="vector_2" cx="11.0529" cy="11.0529" r="8.3029" stroke="#000000" stroke-width="1.5"></circle> </g> </g> </g></svg>
+''';
