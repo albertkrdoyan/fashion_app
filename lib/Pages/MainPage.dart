@@ -10,6 +10,7 @@ import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:fashion_app/Utils/TextOnImage.dart';
+import 'package:fashion_app/Utils/pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -295,15 +296,7 @@ class MainPage extends ConsumerWidget{
 
                         SizedBox(height: 5 * sW,),
 
-                        SizedBox(
-                          width: 125 * sW,
-                          height: 9.25 * sW,
-                          child: Image.asset(
-                            'lib/Images/HomePage/Logo/Line.png',
-                            color: Colors.black,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        const LinePattern(backColor: Colors.white, color: Color(0xFF222222)),
 
                         SizedBox(height: 13.6 * sW,),
 
@@ -558,15 +551,7 @@ class BottomInfo extends StatelessWidget {
 
                 SizedBox(height: 24 * sW,),
 
-                SizedBox(
-                  width: 125 * sW,
-                  height: 9.25 * sW,
-                  child: Image.asset(
-                    'lib/Images/HomePage/Logo/Line.png',
-                    color: Colors.black,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                const LinePattern(backColor: Colors.white, color: Color(0xFF222222)),
 
                 SizedBox(height: 15.73 * sW,),
 
@@ -588,15 +573,7 @@ class BottomInfo extends StatelessWidget {
 
                 SizedBox(height: 18.73 * sW,),
 
-                SizedBox(
-                  width: 125 * sW,
-                  height: 9.25 * sW,
-                  child: Image.asset(
-                    'lib/Images/HomePage/Logo/Line.png',
-                    color: Colors.black,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                const LinePattern(backColor: Colors.white, color: Color(0xFF222222)),
 
                 Expanded(
                   flex: 1,

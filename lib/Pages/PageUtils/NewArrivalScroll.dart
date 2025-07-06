@@ -4,6 +4,7 @@ import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/searchProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
+import 'package:fashion_app/Utils/pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -40,15 +41,7 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
             ),
           ),
 
-          SizedBox(
-            width: 125 * widget.sW,
-            height: 9.25 * widget.sW,
-            child: Image.asset(
-              'lib/Images/HomePage/Logo/Line.png',
-              color: Colors.black,
-              fit: BoxFit.contain,
-            ),
-          ),
+          const LinePattern(backColor: Colors.white, color: Color(0xFF222222)),
 
           SizedBox(height: 23 * widget.sW,),
 

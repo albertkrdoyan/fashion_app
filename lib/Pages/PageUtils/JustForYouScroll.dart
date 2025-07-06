@@ -2,6 +2,7 @@ import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Pages/ProductDetailsPage.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Utils/ItemShow.dart';
+import 'package:fashion_app/Utils/pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,15 +33,7 @@ class JustForYouScroll extends ConsumerWidget {
             ),
           ),
 
-          SizedBox(
-            width: 125 * sW,
-            height: 9.25 * sW,
-            child: Image.asset(
-              'lib/Images/HomePage/Logo/Line.png',
-              color: Colors.black,
-              fit: BoxFit.cover,
-            ),
-          ),
+          const LinePattern(backColor: Colors.white, color: Color(0xFF222222)),
 
           SizedBox(height: 22 * sW,),
 

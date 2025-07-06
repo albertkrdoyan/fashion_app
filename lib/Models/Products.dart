@@ -17,6 +17,18 @@ class Product{
   final String origin;
   final int selectedSize = 0;
 
+  String get path {
+    return 'lib/Images/Catalog$location$extension${_formatNumber(imgCount - 1)}.jpg';
+  }
+
+  String _formatNumber(int number) {
+    if (number < 0 || number > 999) {
+      throw ArgumentError('Number must be between 0 and 999.');
+    }
+
+    return number.toString().padLeft(3, '0');
+  }
+
   static Map<String, Map<String, List<String>>> categories = {};
 
   Product({
