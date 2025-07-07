@@ -16,7 +16,9 @@ class CartPage extends ConsumerWidget {
     double sW = MediaQuery.of(context).size.width / 375;
     double sH = MediaQuery.of(context).size.height / 797;
 
-    final cartList = ref.watch(cartProvider);
+    final cartList = ref.read(cartProvider);
+
+    debugPrint('CartPage');
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -50,11 +52,12 @@ class CartPage extends ConsumerWidget {
                         color: Color(0xFF222222),
                       ),
 
-                      SizedBox(height: 18 * sH,),
+                      SizedBox(height: 18 * sH),
 
                       for (int i = 0; i < cartList.length; ++i) ...[
                         Container(
                           height: 135 * sH,
+                          width: 343 * sW,
                           margin: EdgeInsets.symmetric(
                             vertical: 5 * sH,
                             horizontal: 16 * sW,
@@ -77,37 +80,54 @@ class CartPage extends ConsumerWidget {
 
                               SizedBox(width: 11 * sW),
 
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    cartList[i].product.brand,
-                                    style: GoogleFonts.tenorSans(
-                                      fontSize: 14 * sW,
-                                      letterSpacing: 2 * sW,
-                                    ),
-                                  ),
+                              SizedBox(
+                                width: 230 * sW,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          cartList[i].product.brand,
+                                          style: GoogleFonts.tenorSans(
+                                            fontSize: 14 * sW,
+                                            letterSpacing: 2 * sW,
+                                          ),
+                                        ),
 
-                                  Text(
-                                    cartList[i].product.name,
-                                    style: GoogleFonts.tenorSans(
-                                      fontSize: 12 * sW,
-                                      color: const Color(0xFF555555),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.remove_shopping_cart_outlined,
+                                            size: 20 * sW,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
 
-                                  DrawCountArea(cartItemIndex: i),
-
-                                  Text(
-                                    '${cartList[i].product.price} ${cartList[i].product.currency}',
-                                    style: GoogleFonts.tenorSans(
-                                      fontSize: 15 * sW,
-                                      color: const Color(0xFFDD8560),
+                                    Text(
+                                      cartList[i].product.name,
+                                      style: GoogleFonts.tenorSans(
+                                        fontSize: 12 * sW,
+                                        color: const Color(0xFF555555),
+                                      ),
                                     ),
-                                  ),
-                                ],
+
+                                    DrawCountArea(cartItemIndex: i),
+
+                                    Text(
+                                      '${cartList[i].product.price} ${cartList[i].product.currency}',
+                                      style: GoogleFonts.tenorSans(
+                                        fontSize: 15 * sW,
+                                        color: const Color(0xFFDD8560),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -163,48 +183,80 @@ class CartPage extends ConsumerWidget {
   }
 }
 
-class DrawCountArea extends ConsumerWidget {
+class DrawCountArea extends ConsumerStatefulWidget {
   const DrawCountArea({super.key, required this.cartItemIndex});
 
   final int cartItemIndex;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final cartListItem = ref.watch(cartProvider)[cartItemIndex];
+  ConsumerState<DrawCountArea> createState() => _DrawCountAreaState();
+}
 
-    debugPrint(cartItemIndex.toString());
+class _DrawCountAreaState extends ConsumerState<DrawCountArea> {
+  @override
+  Widget build(BuildContext context) {
+    final cartListItem = ref.read(cartProvider)[widget.cartItemIndex];
+    double sW = MediaQuery.of(context).size.width / 375;
+    double sH = MediaQuery.of(context).size.height / 797;
 
-    return Container(
-      width: 200,
+    debugPrint(widget.cartItemIndex.toString());
+
+    return SizedBox(
+      width: double.infinity,
+      height: 24 * sH,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
             onTap: () {
-              ref.read(cartProvider.notifier).updateCount(cartListItem.product, cartListItem.count - 1);
+              if (cartListItem.count == 1) return;
+              ref
+                  .read(cartProvider.notifier)
+                  .updateCount(widget.cartItemIndex, cartListItem.count - 1);
+              setState(() {});
             },
             child: Container(
-              height: 25,
-              width: 25,
-              child: Text('-'),
+              height: 22 * sH,
+              width: 22 * sW,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(width: 1, color: const Color(0xFFC4C4C4)),
+              ),
+              child: Center(child: Icon(Icons.remove, size: 16 * sW)),
             ),
           ),
 
-          Text(cartListItem.count.toString()),
+          SizedBox(width: 8.5 * sW),
+
+          Text(
+            cartListItem.count.toString(),
+            style: GoogleFonts.tenorSans(
+              fontSize: 16 * sW,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          SizedBox(width: 8.5 * sW),
 
           GestureDetector(
             onTap: () {
-              ref.read(cartProvider.notifier).updateCount(cartListItem.product, cartListItem.count + 1);
+              ref
+                  .read(cartProvider.notifier)
+                  .updateCount(widget.cartItemIndex, cartListItem.count + 1);
+              setState(() {});
             },
             child: Container(
-              height: 25,
-              width: 25,
-              child: Text('+'),
+              height: 22 * sH,
+              width: 22 * sW,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(width: 1, color: const Color(0xFFC4C4C4)),
+              ),
+              child: Center(child: Icon(Icons.add, size: 16 * sW)),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
-

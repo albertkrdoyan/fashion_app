@@ -37,27 +37,17 @@ class CartProvider extends Notifier<List<CartItem>> {
     if (index == -1) {
       state = [...state, cartItem];
     } else {
-      updateCount(state[index].product, state[index].count);
+      updateCount(index, state[index].count + 1);
     }
   }
 
-  void updateCount(Product product, int newCount) {
+  void updateCount(int index, int newCount) {
     state = [
-      for (final item in state)
-        if (item.product == product)
-          CartItem(product: item.product, count: newCount, sizeIndex: item.sizeIndex)
+      for (int i = 0; i < state.length; ++i)
+        if (index == i)
+          CartItem(product: state[index].product, count: newCount, sizeIndex: state[index].sizeIndex)
         else
-          item
-    ];
-  }
-
-  void updateSizeIndex(Product product, int newSizeIndex) {
-    state = [
-      for (final item in state)
-        if (item.product == product)
-          CartItem(product: item.product, count: item.count, sizeIndex: newSizeIndex)
-        else
-          item
+          state[index]
     ];
   }
 
