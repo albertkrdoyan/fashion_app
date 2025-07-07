@@ -1,6 +1,5 @@
 import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Models/svgImages.dart';
-import 'package:fashion_app/Pages/CartPage.dart';
 import 'package:fashion_app/Pages/MainPage.dart';
 import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/PageUtils/ProductSizeSelection.dart';
@@ -34,6 +33,37 @@ class ProductDetailsPage extends ConsumerWidget {
         actions: const [
           CartPageLoader()
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: MaterialButton(
+          onPressed: () {
+            ref.read(cartProvider.notifier).addToCart(product, 1, ProductSizeSelection.selectedSizeO);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('The item has been added to your cart.'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          },
+          // height: 86 * sH,
+          padding: EdgeInsets.symmetric(vertical: 15 * sW),
+          color: Colors.black,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.add_shopping_cart_sharp, color: Colors.white, size: 28 * sW,),
+              SizedBox(width: 10 * sW,),
+              Text(
+                " ADD TO CART",
+                style: GoogleFonts.tenorSans(
+                  color: Colors.white,
+                  fontSize: 14 * sW,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       body: SafeArea(
         child: LayoutBuilder(

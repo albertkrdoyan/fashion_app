@@ -41,13 +41,22 @@ class CartProvider extends Notifier<List<CartItem>> {
     }
   }
 
+  void remove(int index) {
+    if (index < 0 || index >= state.length) return;
+    state = List.from(state)..removeAt(index);
+  }
+
   void updateCount(int index, int newCount) {
     state = [
       for (int i = 0; i < state.length; ++i)
         if (index == i)
-          CartItem(product: state[index].product, count: newCount, sizeIndex: state[index].sizeIndex)
+          CartItem(
+            product: state[index].product,
+            count: newCount,
+            sizeIndex: state[index].sizeIndex,
+          )
         else
-          state[index]
+          state[i]
     ];
   }
 
@@ -57,6 +66,16 @@ class CartProvider extends Notifier<List<CartItem>> {
     }
 
     return -1;
+  }
+
+  double getTotalPrice({double additionalValue = 0}){
+    double total = 0.0;
+
+    for (final item in state){
+      total += item.product.price * item.count;
+    }
+
+    return total + additionalValue;
   }
 }
 

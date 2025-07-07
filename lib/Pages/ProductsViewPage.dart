@@ -1,11 +1,9 @@
 import 'package:fashion_app/Models/svgImages.dart';
-import 'package:fashion_app/Pages/CartPage.dart';
 import 'package:fashion_app/Pages/MainPage.dart';
 import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Models/Products.dart';
 import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/ProductDetailsPage.dart';
-import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Provider/NumberedPageIndicatorProvider.dart';
 import 'package:fashion_app/Provider/searchProvider.dart';

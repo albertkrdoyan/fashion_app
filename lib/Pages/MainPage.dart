@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'package:fashion_app/Models/svgImages.dart';
-import 'package:fashion_app/Pages/CartPage.dart';
 import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/PageUtils/JustForYouScroll.dart';
 import 'package:fashion_app/Pages/PageUtils/NewArrivalScroll.dart';
 import 'package:fashion_app/Pages/ProductsViewPage.dart';
-import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Provider/CatalogProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
 import 'package:fashion_app/Utils/TextOnImage.dart';

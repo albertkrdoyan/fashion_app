@@ -544,11 +544,11 @@
 		"size": ["ONE SIZE"],
 		"extension": ["tbag_view_", 4],
 		"location": "/T-Bags/T-Bag 001/",
-		"price" : 299,
+		"price" : 119000,
 		"currency": "USD",
 		"Composition":
 		{
-			"OUTER SHELL" : [],
+			"OUTER SHELL" : ["70% polyurethane","30% polyester"],
 			"LINING": [],
 			"Description": "Crafted from soft leather, this carryall bag features ample storage for a wide variety of everyday carry items. Designed with an open style interior with magnetic closures, dual zippered compartments along the sides and an optional crossbody strap."
 			},
@@ -557,17 +557,17 @@
 		"Origin": ""
 	},
 	{
-		"name" : "Carryall Leather Medium Tote Bag",
+		"name" : "Ultralight Tote Bag",
 		"brand": "Calvin Klein",
 		"category" : ["WOMEN", "Bags", "Tote bags"],
 		"size": ["ONE SIZE"],
 		"extension": ["tbag_view_", 4],
 		"location": "/T-Bags/T-Bag 002/",
-		"price" : 299,
+		"price" : 119000,
 		"currency": "USD",
 		"Composition":
 		{
-			"OUTER SHELL" : [],
+			"OUTER SHELL" : ["70% polyurethane","30% polyester"],
 			"LINING": [],
 			"Description": "Crafted from soft leather, this carryall bag features ample storage for a wide variety of everyday carry items. Designed with an open style interior with magnetic closures, dual zippered compartments along the sides and an optional crossbody strap."
 		},
