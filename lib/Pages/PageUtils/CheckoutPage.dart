@@ -19,6 +19,7 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
   final List<List<dynamic>> shippingMethods = [
     ['Standard Shipping, 3–7 business days', 1900.0],
     ['Express Shipping, 1–3 business days', 4900.0],
+    ['Free Shipping, 7–15 business days', 0.0],
     ['In-Store Pickup', 0.0]
   ];
   List<dynamic>? selectedShippingMethod;
@@ -234,7 +235,7 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
                 ),
 
                 // shipping address
-                if (selectedShippingMethod != null && selectedShippingMethod![1] != 0)...[
+                if (selectedShippingMethod != null && selectedShippingMethod != shippingMethods.last)...[
                   SizedBox(height: 36 * sH),
                   Container(
                     alignment: Alignment.centerLeft,

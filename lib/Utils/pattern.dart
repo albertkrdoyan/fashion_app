@@ -27,7 +27,7 @@ class LinePattern extends StatelessWidget {
           angle: math.pi / 4,
           child: Container(
             width: 6.54 * sW,
-            height: 6.54 * sH,
+            height: 6.54 * sW,
             decoration: BoxDecoration(
                 color: backColor,
                 border: BoxBorder.all(

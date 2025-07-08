@@ -5,10 +5,12 @@ import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/PageUtils/ProductSizeSelection.dart';
 import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
+import 'package:fashion_app/Utils/svgIconButtonWithStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:superellipse_shape/superellipse_shape.dart';
 
 class ProductDetailsPage extends ConsumerWidget {
   ProductDetailsPage({super.key, required this.product});
@@ -100,16 +102,10 @@ class ProductDetailsPage extends ConsumerWidget {
                                         initialIndex: imagesController.page,
                                       ),
                                     )),
-                                    child: Container(
-                                      height: 36 * sW, width: 36 * sW,
-                                      padding: EdgeInsets.all(10 * sW),
-                                      margin: EdgeInsets.all(10 * sW),
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.withAlpha(128),
-                                        shape: BoxShape.circle
-                                      ),
-                                      child: SvgPicture.string(zoomSVG,),
-                                    ),
+                                    child: SvgIconButtonWithStyle(
+                                      color: Colors.black.withAlpha(165),
+                                      svgPath: zoomInSVG,
+                                    )
                                   ),
                                 ],
                               ),
@@ -518,19 +514,16 @@ class _ImageViewFullScreenState extends State<ImageViewFullScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 25 * sW),
-                      width: 40 * sW,
-                      height: 40 * sW,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xAA555555),
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(Icons.close_fullscreen_sharp, size: 30 * sW),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: 15 * sW, top: 8 * sW),
+                        child: SvgIconButtonWithStyle(
+                          color: Colors.white.withAlpha(128),
+                          svgPath: zoomOutSVG,
+                        ),
                       ),
                     ),
                   ],
