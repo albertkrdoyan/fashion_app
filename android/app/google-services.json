@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "162411159854",
+    "project_id": "first-fb-project-88093",
+    "storage_bucket": "first-fb-project-88093.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162411159854:android:139081bbfdba5efcb85abf",
+        "android_client_info": {
+          "package_name": "com.example.fashion_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJXq7MhKMwJp9SJX8iPgiGH4hQEErR5ms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

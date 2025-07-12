@@ -1,4 +1,5 @@
 import 'package:fashion_app/Models/Products.dart';
+import 'package:fashion_app/Utils/catalogImagesPath.dart';
 import 'package:flutter/material.dart';
 
 class ItemShow extends StatefulWidget {
@@ -21,8 +22,8 @@ class _ItemShowState extends State<ItemShow> {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        Image.asset(
-          'lib/Images/Catalog${widget.product.location}${widget.product.extension}${formatNumber(widget.imgIndexes[initialIndex])}.jpg',
+        Image.network(
+          getUrlPath('${widget.product.location}${widget.product.extension}${formatNumber(widget.imgIndexes[initialIndex])}.jpg'),
           fit: BoxFit.cover,
           alignment: Alignment.center,
         ),

@@ -1,7 +1,7 @@
 
-import 'package:fashion_app/Models/svgImages.dart';
 import 'package:fashion_app/Pages/PageUtils/CheckoutPage.dart';
 import 'package:fashion_app/Provider/CartProvider.dart';
+import 'package:fashion_app/Utils/catalogImagesPath.dart';
 import 'package:fashion_app/Utils/pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,7 +32,7 @@ class _CartPageState extends ConsumerState<CartPage> {
         backgroundColor: Colors.white,
         centerTitle: true,
         toolbarHeight: 60 * sW,
-        title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
+        title: SvgPicture.asset('lib/Images/HomePage/Logo/Logo.svg'),
       ),
       bottomNavigationBar: SafeArea(
         child: SizedBox(
@@ -99,8 +99,8 @@ class _CartPageState extends ConsumerState<CartPage> {
                     : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.string(
-                          shoppingBagReverseSVG,
+                        SvgPicture.asset(
+                          'lib/Images/HomePage/Logo/ShoppingBagR.svg',
                           width: 28 * sW,
                           height: 28 * sH,
                         ),
@@ -158,8 +158,15 @@ class _CartPageState extends ConsumerState<CartPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          cartList[i].product.path,
+                        // Image.asset(
+                        //   cartList[i].product.path,
+                        //   width: 100 * sW,
+                        //   height: 135 * sH,
+                        //   fit: BoxFit.cover,
+                        // ),
+
+                        Image.network(
+                          getUrlPath(cartList[i].product.path),
                           width: 100 * sW,
                           height: 135 * sH,
                           fit: BoxFit.cover,

@@ -43,6 +43,9 @@ dependencies:
   carousel_slider: ^5.1.1
   dropdown_button2: ^2.3.9
   superellipse_shape:
+  firebase_core:
+  cloud_firestore:
+#  firebase_auth:
 
 dev_dependencies:
   flutter_test:
@@ -71,40 +74,9 @@ flutter:
      - lib/Images/HomePage/Logo/
      - lib/Images/HomePage/Main/
      - lib/JSONS/
-     - lib/Images/Items/
      - lib/Images/OpenFashionImages/
      - lib/Images/FollowUsImages/
      - lib/Images/Bottom/
-     - lib/Images/Catalog/Dresses/Dress 001/
-     - lib/Images/Catalog/Dresses/Dress 002/
-     - lib/Images/Catalog/Dresses/Dress 003/
-     - lib/Images/Catalog/Dresses/Dress 004/
-     - lib/Images/Catalog/Dresses/Dress 005/
-     - lib/Images/Catalog/Dresses/Dress 006/
-     - lib/Images/Catalog/Skirts/Skirt 001/
-     - lib/Images/Catalog/Skirts/Skirt 002/
-     - lib/Images/Catalog/Skirts/Skirt 003/
-     - lib/Images/Catalog/Skirts/Skirt 004/
-     - lib/Images/Catalog/Skirts/Skirt 005/
-     - lib/Images/Catalog/Skirts/Skirt 006/
-     - lib/Images/Catalog/T-shirts/T-shirt 001/
-     - lib/Images/Catalog/T-shirts/T-shirt 002/
-     - lib/Images/Catalog/T-shirts/T-shirt 003/
-     - lib/Images/Catalog/T-shirts/T-shirt 004/
-     - lib/Images/Catalog/T-shirts/T-shirt 005/
-     - lib/Images/Catalog/T-shirts/T-shirt 006/
-     - lib/Images/Catalog/Trousers/Trouser 001/
-     - lib/Images/Catalog/Trousers/Trouser 002/
-     - lib/Images/Catalog/Trousers/Trouser 003/
-     - lib/Images/Catalog/Trousers/Trouser 004/
-     - lib/Images/Catalog/Trousers/Trouser 005/
-     - lib/Images/Catalog/Trousers/Trouser 006/
-     - lib/Images/Catalog/S-Bags/S-Bag 001/
-     - lib/Images/Catalog/S-Bags/S-Bag 002/
-     - lib/Images/Catalog/S-Bags/S-Bag 003/
-     - lib/Images/Catalog/S-Bags/S-Bag 004/
-     - lib/Images/Catalog/T-Bags/T-Bag 001/
-     - lib/Images/Catalog/T-Bags/T-Bag 002/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

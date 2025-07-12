@@ -1,4 +1,3 @@
-import 'package:fashion_app/Models/svgImages.dart';
 import 'package:fashion_app/Pages/MainPage.dart';
 import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Models/Products.dart';
@@ -44,13 +43,13 @@ class ProductsViewPage extends ConsumerWidget {
               isProductsViewPageActive = false;
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
-            child: Image.asset('lib/Images/HomePage/Logo/Logo.png')
+            child: SvgPicture.asset('lib/Images/HomePage/Logo/Logo.svg'),
           ),
           leading: Builder(
             builder: (context) => GestureDetector(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15 * sW),
-                child: SvgPicture.string(menuSVG),
+                child: SvgPicture.asset('lib/Images/HomePage/Logo/Menu.svg'),
               ),
               onTap: () {
                 Navigator.of(context).push(
@@ -66,7 +65,7 @@ class ProductsViewPage extends ConsumerWidget {
           actions: [
             Padding(
               padding: EdgeInsets.only(right: 16 * sW),
-              child: SvgPicture.string(searchSVG, height: 25 * sW, width: 20 * sW,)
+              child: SvgPicture.asset('lib/Images/HomePage/Logo/Search.svg', height: 25 * sW, width: 20 * sW,)
             ),
             // SizedBox(width: screenWidth * 0.04,),
             const CartPageLoader()

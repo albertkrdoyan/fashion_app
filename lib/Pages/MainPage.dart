@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:fashion_app/Models/svgImages.dart';
 import 'package:fashion_app/Pages/MenuPage.dart';
 import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/PageUtils/JustForYouScroll.dart';
@@ -22,10 +21,26 @@ class MainPage extends ConsumerWidget{
   int _currentPage = 0;
   Timer? _timer;
 
+  static bool writeToDB = false;
+
   MenuPage? menuPage;
   GlobalKey<MenuPageState> menuPageKey = GlobalKey<MenuPageState>();
 
   MainPage({super.key});
+  // Future<void> uploadJsonToFirestore() async {
+  //   final String rawJson = await rootBundle.loadString('lib/JSONS/catalog.json');
+  //   final List<dynamic> dataList = json.decode(rawJson);
+  //
+  //   int id = 0;
+  //
+  //   for (final item in dataList) {
+  //     final Map<String, dynamic> newItem = {
+  //       'id': id++,
+  //       ...item,
+  //     };
+  //     await FirebaseFirestore.instance.collection('catalog').add(newItem);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,18 +56,6 @@ class MainPage extends ConsumerWidget{
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ref.read(productCatalogProvider.notifier).updateList(data['catalog']);
           ref.read(productCategoriesProvider.notifier).update(ref.read(productCatalogProvider));
-
-          // Set<String> careMethods = {};
-          //
-          // for (var item in ref.read(productCatalogProvider)){
-          //   for (int i = 0; i < item.info.length; ++i){
-          //     careMethods.add(item.info[i].toUpperCase());
-          //   }
-          // }
-          //
-          // for (var method in careMethods){
-          //   debugPrint(method);
-          // }
         });
 
         return Scaffold(
@@ -61,16 +64,15 @@ class MainPage extends ConsumerWidget{
             backgroundColor: const Color(0xFFE7EAEF),
             centerTitle: true,
             toolbarHeight: 60 * sW,
-            title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
+            // title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
+            title: SvgPicture.asset('lib/Images/HomePage/Logo/Logo.svg'),
             leading: Builder(
               builder: (context) => GestureDetector(
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 15 * sW),
-                  child: SvgPicture.string(menuSVG,),
+                  child: SvgPicture.asset('lib/Images/HomePage/Logo/Menu.svg'),
                 ),
                 onTap: () {
-                  // menuPage ??= MenuPage(key: menuPageKey,);
-
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
@@ -84,10 +86,10 @@ class MainPage extends ConsumerWidget{
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 16 * sW),
-                child: SvgPicture.string(searchSVG, height: 25 * sW, width: 20 * sW,)
+                child: SvgPicture.asset('lib/Images/HomePage/Logo/Search.svg', height: 25 * sW, width: 20 * sW,)
               ),
               // SizedBox(width: screenWidth * 0.04,),
-              const CartPageLoader()
+              const CartPageLoader(),
             ],
           ),
           body: SafeArea(
@@ -163,9 +165,7 @@ class MainPage extends ConsumerWidget{
 
                   SizedBox(height: 37 * sW,),
 
-                  Image.asset(
-                      'lib/Images/HomePage/Main/Brand.png'
-                  ),
+                  SvgPicture.asset('lib/Images/HomePage/Main/Brand.svg'),
 
                   SizedBox(height: 47 * sW,),
 
@@ -174,9 +174,7 @@ class MainPage extends ConsumerWidget{
                     // fit: StackFit.,
                     alignment: Alignment.topCenter,
                     children: [
-                      Image.asset(
-                          'lib/Images/HomePage/Main/AutumnCollection.png'
-                      ),
+                      Image.asset('lib/Images/HomePage/Main/AutumnCollection.png'),
 
                       Text(
                         'COLLECTIONS',
@@ -270,8 +268,8 @@ class MainPage extends ConsumerWidget{
                         SizedBox(
                           height: 40 * sW,
                           width: 98 * sW,
-                          child: Image.asset(
-                            'lib/Images/HomePage/Logo/Logo.png',
+                          child: SvgPicture.asset(
+                            'lib/Images/HomePage/Logo/Logo.svg',
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -310,13 +308,11 @@ class MainPage extends ConsumerWidget{
                               width: 165 * sW,
                               child: Column(
                                 children: [
-                                  SizedBox(
+                                  Image.asset(
+                                    openFashionList[index]['img'],
+                                    fit: BoxFit.fitWidth,
                                     height: 48 * sW,
                                     width: 52 * sW,
-                                    child: Image.asset(
-                                      openFashionList[index]['img'],
-                                      fit: BoxFit.fitWidth,
-                                    ),
                                   ),
 
                                   Text(
@@ -456,7 +452,7 @@ class MainPage extends ConsumerWidget{
           ),
         );
       },
-      loading: () => const Text("Loading..."),
+      loading: () => const Center(child: CircularProgressIndicator()),
       error: (err, stack) => Text('Error: $err'),
     );
   }
@@ -617,11 +613,6 @@ class BottomInfo extends StatelessWidget {
             width: 375 * sW,
             color: const Color(0xFFC4C4C4),
             child: Center(
-              // padding: EdgeInsets.only(bottom: 12.5 * sW),
-              // alignment: Alignment.center,
-              // color: Colors.red,
-              // height: 19 * sW,
-              // width: 240 * sW,
               child: Text(
                 'Copyright© OpenUI All Rights Reserved.',
                 style: GoogleFonts.tenorSans(

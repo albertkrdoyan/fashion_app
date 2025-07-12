@@ -1,13 +1,13 @@
-import 'package:fashion_app/Models/svgImages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:superellipse_shape/superellipse_shape.dart';
 
 class SvgIconButtonWithStyle extends StatelessWidget {
-  const SvgIconButtonWithStyle({super.key, required this.color, required this.svgPath});
+  const SvgIconButtonWithStyle({super.key, required this.color, required this.svgPath, this.height = 36, this.width = 36});
 
   final Color color;
   final String svgPath;
+  final double height, width;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class SvgIconButtonWithStyle extends StatelessWidget {
         ),
         color: color,
         child: Container(
-          height: 36 * sW,
-          width: 36 * sW,
+          height: height * sW,
+          width: width * sW,
           padding: EdgeInsets.all(3 * sW),
           child: SvgPicture.string(
             svgPath,

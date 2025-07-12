@@ -18,7 +18,7 @@ class Product{
   final int selectedSize = 0;
 
   String get path {
-    return 'lib/Images/Catalog$location$extension${_formatNumber(imgCount - 1)}.jpg';
+    return '$location$extension${_formatNumber(imgCount - 1)}.jpg';
   }
 
   String _formatNumber(int number) {

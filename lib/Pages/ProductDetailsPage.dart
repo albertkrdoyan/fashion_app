@@ -5,12 +5,12 @@ import 'package:fashion_app/Pages/PageUtils/CartPageLoader.dart';
 import 'package:fashion_app/Pages/PageUtils/ProductSizeSelection.dart';
 import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Utils/DrawPageIndicator.dart';
+import 'package:fashion_app/Utils/catalogImagesPath.dart';
 import 'package:fashion_app/Utils/svgIconButtonWithStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:superellipse_shape/superellipse_shape.dart';
 
 class ProductDetailsPage extends ConsumerWidget {
   ProductDetailsPage({super.key, required this.product});
@@ -31,7 +31,7 @@ class ProductDetailsPage extends ConsumerWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
         toolbarHeight: 60 * sW,
-        title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
+        title: SvgPicture.asset('lib/Images/HomePage/Logo/Logo.svg'),
         actions: const [
           CartPageLoader()
         ],
@@ -397,8 +397,8 @@ class ImageShow extends StatelessWidget {
       controller: imagesController,
       children: [
         for (int i = 0; i < product.imgCount; ++i)...[
-          Image.asset(
-            'lib/Images/Catalog${product.location}${product.extension}${formatNumber(i + 1)}.jpg',
+          Image.network(
+            getUrlPath('${product.location}${product.extension}${formatNumber(i + 1)}.jpg'),
             fit: BoxFit.cover,
           )
         ]
@@ -498,8 +498,8 @@ class _ImageViewFullScreenState extends State<ImageViewFullScreen> {
                         },
                         itemCount: widget.product.imgCount,
                         itemBuilder: (context, index) {
-                          return Image.asset(
-                            'lib/Images/Catalog${widget.product.location}${widget.product.extension}${formatNumber(index + 1)}.jpg',
+                          return Image.network(
+                            getUrlPath('${widget.product.location}${widget.product.extension}${formatNumber(index + 1)}.jpg'),
                             fit: BoxFit.cover,
                           );
                         },

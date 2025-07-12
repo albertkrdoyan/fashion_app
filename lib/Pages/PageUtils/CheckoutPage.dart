@@ -1,5 +1,4 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:fashion_app/Models/svgImages.dart';
 import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:fashion_app/Provider/ShippingAddressProvider.dart';
 import 'package:fashion_app/Utils/pattern.dart';
@@ -91,8 +90,8 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.string(
-                        shoppingBagReverseSVG,
+                      SvgPicture.asset(
+                        'lib/Images/HomePage/Logo/ShoppingBagR.svg',
                         width: 28 * sW,
                         height: 28 * sH,
                       ),

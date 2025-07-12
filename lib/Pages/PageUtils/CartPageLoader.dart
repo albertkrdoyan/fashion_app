@@ -1,4 +1,3 @@
-import 'package:fashion_app/Models/svgImages.dart';
 import 'package:fashion_app/Pages/CartPage.dart';
 import 'package:fashion_app/Provider/CartProvider.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class CartPageLoader extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  SvgPicture.string(shoppingBagSVG, height: 25 * sW, width: 20 * sW,),
+                  SvgPicture.asset('lib/Images/HomePage/Logo/ShoppingBag.svg', height: 25 * sW, width: 20 * sW,),
                   if(cartList.isNotEmpty)
                     Transform.translate(
                     offset: Offset(10 * sW, -10 * sW),
