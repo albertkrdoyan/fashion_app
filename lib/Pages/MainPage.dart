@@ -15,35 +15,29 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Provider/jsonProvider.dart';
 
-class MainPage extends ConsumerWidget{
+class MainPage extends ConsumerStatefulWidget{
+  const MainPage({super.key});
+
+  @override
+  ConsumerState<MainPage> createState() => _MainPageState();
+}
+class _MainPageState extends ConsumerState<MainPage> {
   final mainPageImagesController = PageController();
   static const _autoScrollDuration = 15;
   int _currentPage = 0;
   Timer? _timer;
 
-  static bool writeToDB = false;
-
   MenuPage? menuPage;
   GlobalKey<MenuPageState> menuPageKey = GlobalKey<MenuPageState>();
 
-  MainPage({super.key});
-  // Future<void> uploadJsonToFirestore() async {
-  //   final String rawJson = await rootBundle.loadString('lib/JSONS/catalog.json');
-  //   final List<dynamic> dataList = json.decode(rawJson);
-  //
-  //   int id = 0;
-  //
-  //   for (final item in dataList) {
-  //     final Map<String, dynamic> newItem = {
-  //       'id': id++,
-  //       ...item,
-  //     };
-  //     await FirebaseFirestore.instance.collection('catalog').add(newItem);
-  //   }
-  // }
+  @override
+  void dispose() {
+    mainPageImagesController.dispose();
+    super.dispose();
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     double sW = MediaQuery.of(context).size.width / 375;
 
     return ref.watch(jsonDataProvider).when(
@@ -129,7 +123,7 @@ class MainPage extends ConsumerWidget{
                           MaterialButton(
                             onPressed: (){
                               Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) => const ProductsViewPage(),),
+                                MaterialPageRoute(builder: (context) => ProductsViewPage(),),
                               );
                             },
                             color: Colors.black.withAlpha(125),
@@ -161,7 +155,7 @@ class MainPage extends ConsumerWidget{
                   SizedBox(height: 27 * sW,),
 
                   // new arrival
-                  NewArrivalScroll(key: ValueKey(key), sW: sW,),
+                  NewArrivalScroll(key: ValueKey(widget.key), sW: sW,),
 
                   SizedBox(height: 37 * sW,),
 

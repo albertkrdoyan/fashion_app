@@ -14,7 +14,6 @@ class CartPage extends ConsumerStatefulWidget {
   @override
   ConsumerState<CartPage> createState() => _CartPageState();
 }
-
 class _CartPageState extends ConsumerState<CartPage> {
   @override
   Widget build(BuildContext context) {
@@ -248,7 +247,6 @@ class DrawCountArea extends ConsumerStatefulWidget {
   @override
   ConsumerState<DrawCountArea> createState() => _DrawCountAreaState();
 }
-
 class _DrawCountAreaState extends ConsumerState<DrawCountArea> {
   @override
   Widget build(BuildContext context) {

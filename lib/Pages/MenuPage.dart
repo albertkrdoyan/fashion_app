@@ -12,7 +12,6 @@ class MenuPage extends StatefulWidget {
   @override
   State<MenuPage> createState() => MenuPageState();
 }
-
 class MenuPageState extends State<MenuPage> {
   int currentMenuIndex = 0;
   final List wList = [
@@ -98,7 +97,6 @@ class DrawMenu extends ConsumerStatefulWidget {
   @override
   ConsumerState<DrawMenu> createState() => _DrawMenuState();
 }
-
 class _DrawMenuState extends ConsumerState<DrawMenu> {
   List<bool> isExpandedList = [];
   late final Map<String, List<String>> subCategories;
@@ -226,7 +224,7 @@ class SubMenuDraw extends ConsumerWidget {
           debugPrint(ProductsViewPage.isProductsViewPageActive.toString());
           if (!ProductsViewPage.isProductsViewPageActive){
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ProductsViewPage(),),
+              MaterialPageRoute(builder: (context) => ProductsViewPage(),),
             );
           }
           else{
@@ -244,7 +242,6 @@ class SubMenuDraw extends ConsumerWidget {
     );
   }
 }
-
 
 class Info extends StatelessWidget {
   const Info({super.key});

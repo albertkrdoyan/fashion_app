@@ -13,13 +13,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductsViewPage extends ConsumerWidget {
+class ProductsViewPage extends ConsumerStatefulWidget {
   const ProductsViewPage({super.key});
+
   static bool isProductsViewPageActive = false;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    isProductsViewPageActive = true;
+  ConsumerState<ProductsViewPage> createState() => _StateProductsViewPage();
+}
+class _StateProductsViewPage extends ConsumerState<ProductsViewPage>{
+  final scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ProductsViewPage.isProductsViewPageActive = true;
     double sW = MediaQuery.sizeOf(context).width / 375;
     debugPrint('ProductsViewPage');
 
@@ -27,8 +40,8 @@ class ProductsViewPage extends ConsumerWidget {
       canPop: true,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
-          isProductsViewPageActive = false;
-          debugPrint('bye $isProductsViewPageActive');
+          ProductsViewPage.isProductsViewPageActive = false;
+          debugPrint('bye ${ProductsViewPage.isProductsViewPageActive}');
           ref.read(searchKeywordsProvider.notifier).clear();
         }
       },
@@ -40,7 +53,7 @@ class ProductsViewPage extends ConsumerWidget {
           toolbarHeight: 60 * sW,
           title: GestureDetector(
             onTap: () {
-              isProductsViewPageActive = false;
+              ProductsViewPage.isProductsViewPageActive = false;
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
             child: SvgPicture.asset('lib/Images/HomePage/Logo/Logo.svg'),
@@ -142,7 +155,9 @@ class ProductsViewPage extends ConsumerWidget {
                             SizedBox(height: 8 * sW,),
           
                             // show items
-                            const BuildItemsShow(),
+                            BuildItemsShow(
+                              scrollController: scrollController,
+                            ),
           
                             SizedBox(height: 50 * sW,),
           
@@ -165,7 +180,8 @@ class ProductsViewPage extends ConsumerWidget {
 }
 
 class BuildItemsShow extends ConsumerWidget{
-  const BuildItemsShow({super.key});
+  const BuildItemsShow({super.key, required this.scrollController});
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

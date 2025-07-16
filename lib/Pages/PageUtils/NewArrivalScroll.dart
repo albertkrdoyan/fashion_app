@@ -18,7 +18,6 @@ class NewArrivalScroll extends ConsumerStatefulWidget {
   @override
   ConsumerState<NewArrivalScroll> createState() => _NewArrivalScrollState();
 }
-
 class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
   int selectedCategoryIndex = 0;
 
@@ -105,7 +104,7 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
               final searchString = "${categories[selectedCategoryIndex][0]} / ${categories[selectedCategoryIndex][1]} / ${categories[selectedCategoryIndex][2]}";
               ref.read(searchKeywordsProvider.notifier).addToKeywords([searchString, true]);
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const ProductsViewPage(),),
+                MaterialPageRoute(builder: (context) => ProductsViewPage(),),
               );
             },
             child: SizedBox(
@@ -134,32 +133,27 @@ class _NewArrivalScrollState extends ConsumerState<NewArrivalScroll> {
   }
 }
 
-class ItemShowByCategory extends ConsumerStatefulWidget {
+class ItemShowByCategory extends ConsumerWidget {
   const ItemShowByCategory({super.key, required this.category, required this.sW});
 
   final List<String> category;
   final double sW;
 
   @override
-  ConsumerState<ItemShowByCategory> createState() => _ItemShowByCategoryState();
-}
-
-class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
-  @override
-  Widget build(BuildContext context) {
-    List<Product> catItemsList = listByCategory();
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<Product> catItemsList = listByCategory(ref);
     catItemsList.shuffle();
 
     return SizedBox(
-      height: 530 * widget.sW,
+      height: 530 * sW,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16 * widget.sW,),
+        padding: EdgeInsets.symmetric(horizontal: 16 * sW,),
         child: MasonryGridView.count(
-          key: ValueKey(widget.key),
+          key: ValueKey(key),
           itemCount: catItemsList.length > 4 ? 4 : catItemsList.length,
           crossAxisCount: 2,
-          crossAxisSpacing: 13 * widget.sW,
-          mainAxisSpacing: 11 * widget.sW,
+          crossAxisSpacing: 13 * sW,
+          mainAxisSpacing: 11 * sW,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return GestureDetector(
@@ -170,7 +164,7 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
               },
               child: SizedBox(
                   key: ValueKey(index),
-                  height: 265 * widget.sW,
+                  height: 265 * sW,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -182,14 +176,14 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
                                 width: 1
                             ),
                           ),
-                          height: 200 * widget.sW,
-                          width: 165 * widget.sW,
+                          height: 200 * sW,
+                          width: 165 * sW,
                           child: ItemShow(
                             key: ValueKey(index),
                             product: catItemsList[index],
-                            sW: widget.sW,
+                            sW: sW,
                             imgIndexes: [catItemsList[index].imgCount - 1, catItemsList[index].imgCount],
-                            padding: 165 * widget.sW * 0.01,
+                            padding: 165 * sW * 0.01,
                           )
                       ),
 
@@ -199,7 +193,7 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
                             : '${catItemsList[index].name.toString().substring(0, 41)}..'),
                         textAlign: TextAlign.center,
                         style: GoogleFonts.tenorSans(
-                            fontSize: 14 * widget.sW,
+                            fontSize: 14 * sW,
                             color: const Color(0xFF333333)
                         ),
                       ),
@@ -208,7 +202,7 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
                         '${catItemsList[index].price} ${catItemsList[index].currency}',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.tenorSans(
-                            fontSize: 16 * widget.sW,
+                            fontSize: 16 * sW,
                             color: const Color(0xFFDD8560)
                         ),
                       )
@@ -222,15 +216,15 @@ class _ItemShowByCategoryState extends ConsumerState<ItemShowByCategory> {
     );
   }
 
-  List<Product> listByCategory(){
+  List<Product> listByCategory(WidgetRef ref){
     List<Product> itemList = ref.read(productCatalogProvider);
 
-    if (widget.category[0] == "All") return itemList;
+    if (category[0] == "All") return itemList;
 
     List<Product> catItemsList = [];
 
     for (int i = 0; i < itemList.length; ++i){
-      if (areSame(itemList[i].category, widget.category)){
+      if (areSame(itemList[i].category, category)){
         catItemsList.add(itemList[i]);
       }
     }

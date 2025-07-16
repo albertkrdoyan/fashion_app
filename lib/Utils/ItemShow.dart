@@ -12,7 +12,6 @@ class ItemShow extends StatefulWidget {
   @override
   State<ItemShow> createState() => _ItemShowState();
 }
-
 class _ItemShowState extends State<ItemShow> {
   int initialIndex = 0;
 

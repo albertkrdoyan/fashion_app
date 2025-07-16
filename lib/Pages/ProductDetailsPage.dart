@@ -12,15 +12,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductDetailsPage extends ConsumerWidget {
-  ProductDetailsPage({super.key, required this.product});
+class ProductDetailsPage extends ConsumerStatefulWidget {
+  const ProductDetailsPage({super.key, required this.product});
 
   final Product product;
 
+  @override
+  ConsumerState<ProductDetailsPage> createState() => _StateProductDetailsPage();
+}
+class _StateProductDetailsPage extends ConsumerState<ProductDetailsPage>{
   final imagesController = PageController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    imagesController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double sW = MediaQuery.sizeOf(context).width / 375;
 
     debugPrint('_ProductDetailsPageState');
@@ -39,7 +49,7 @@ class ProductDetailsPage extends ConsumerWidget {
       bottomNavigationBar: SafeArea(
         child: MaterialButton(
           onPressed: () {
-            ref.read(cartProvider.notifier).addToCart(product, 1, ProductSizeSelection.selectedSizeO);
+            ref.read(cartProvider.notifier).addToCart(widget.product, 1, ProductSizeSelection.selectedSizeO);
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('The item has been added to your cart.'),
@@ -93,12 +103,12 @@ class ProductDetailsPage extends ConsumerWidget {
                               child: Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  ImageShow(imagesController: imagesController, product: product),
+                                  ImageShow(imagesController: imagesController, product: widget.product),
 
                                   GestureDetector(
                                     onTap: () => Navigator.push(context, MaterialPageRoute(
                                       builder: (context) => ImageViewFullScreen(
-                                        product: product,
+                                        product: widget.product,
                                         initialIndex: imagesController.page,
                                       ),
                                     )),
@@ -113,7 +123,7 @@ class ProductDetailsPage extends ConsumerWidget {
 
                             SizedBox(height: 10 * sW,),
                             // indicator
-                            DrawPageIndicator(controller: imagesController, size: 6.5 * sW, count: product.imgCount, selectedItemColor: Colors.grey,),
+                            DrawPageIndicator(controller: imagesController, size: 6.5 * sW, count: widget.product.imgCount, selectedItemColor: Colors.grey,),
 
                             SizedBox(height: 10 * sW,),
                           ],
@@ -130,7 +140,7 @@ class ProductDetailsPage extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              product.brand,
+                              widget.product.brand,
                               style: GoogleFonts.tenorSans(
                                 fontSize: 16 * sW,
                                 letterSpacing: 4 * sW
@@ -138,7 +148,7 @@ class ProductDetailsPage extends ConsumerWidget {
                             ),
 
                             Text(
-                              product.name,
+                              widget.product.name,
                               style: GoogleFonts.tenorSans(
                                 fontSize: 16 * sW,
                                 color: const Color(0xFF555555)
@@ -146,7 +156,7 @@ class ProductDetailsPage extends ConsumerWidget {
                             ),
 
                             Text(
-                              '${product.price} ${product.currency}',
+                              '${widget.product.price} ${widget.product.currency}',
                               style: GoogleFonts.tenorSans(
                                 fontSize: 18 * sW,
                                 color: const Color(0xFFDD8560)
@@ -156,7 +166,7 @@ class ProductDetailsPage extends ConsumerWidget {
                             SizedBox(height: 10 * sW,),
 
                             ProductSizeSelection(
-                              product: product,
+                              product: widget.product,
                             )
                           ],
                         ),
@@ -172,7 +182,7 @@ class ProductDetailsPage extends ConsumerWidget {
                       ),
 
                       // info
-                      if (product.outerShell.isNotEmpty || product.lining.isNotEmpty)...[
+                      if (widget.product.outerShell.isNotEmpty || widget.product.lining.isNotEmpty)...[
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 16 * sW),
                           alignment: Alignment.centerLeft,
@@ -190,7 +200,7 @@ class ProductDetailsPage extends ConsumerWidget {
                           padding: EdgeInsets.symmetric(horizontal: 16 * sW),
                           child: Column(
                             children: [
-                              if (product.outerShell.isNotEmpty)...[
+                              if (widget.product.outerShell.isNotEmpty)...[
                                 SizedBox(height: 8 * sW,),
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 16 * sW),
@@ -204,12 +214,12 @@ class ProductDetailsPage extends ConsumerWidget {
                                     ),
                                   ),
                                 ),
-                                for (int i = 0; i < product.outerShell.length; ++i)...[
+                                for (int i = 0; i < widget.product.outerShell.length; ++i)...[
                                   Container(
                                     padding: EdgeInsets.symmetric(horizontal: 16 * sW, vertical: 6.25 * sW),
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      product.outerShell[i],
+                                      widget.product.outerShell[i],
                                       style: GoogleFonts.tenorSans(
                                         fontSize: 14 * sW,
                                         color: const Color(0xFF555555),
@@ -219,7 +229,7 @@ class ProductDetailsPage extends ConsumerWidget {
                                 ],
                               ],
 
-                              if (product.lining.isNotEmpty)...[
+                              if (widget.product.lining.isNotEmpty)...[
                                 SizedBox(height: 8 * sW,),
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 16 * sW),
@@ -233,12 +243,12 @@ class ProductDetailsPage extends ConsumerWidget {
                                     ),
                                   ),
                                 ),
-                                for (int i = 0; i < product.lining.length; ++i)...[
+                                for (int i = 0; i < widget.product.lining.length; ++i)...[
                                   Container(
                                     padding: EdgeInsets.symmetric(horizontal: 16 * sW, vertical: 6.25 * sW),
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      product.lining[i],
+                                      widget.product.lining[i],
                                       style: GoogleFonts.tenorSans(
                                         fontSize: 14 * sW,
                                         color: const Color(0xFF555555),
@@ -252,7 +262,7 @@ class ProductDetailsPage extends ConsumerWidget {
                         )
                       ],
 
-                      if(product.description.isNotEmpty)...[
+                      if(widget.product.description.isNotEmpty)...[
                         SizedBox(height: 16 * sW,),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 16 * sW),
@@ -271,7 +281,7 @@ class ProductDetailsPage extends ConsumerWidget {
                           padding: EdgeInsets.symmetric(horizontal: 16 * sW, vertical: 6.25 * sW),
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            product.description,
+                            widget.product.description,
                             style: GoogleFonts.tenorSans(
                               fontSize: 14 * sW,
                               color: const Color(0xFF555555),
@@ -280,7 +290,7 @@ class ProductDetailsPage extends ConsumerWidget {
                         ),
                       ],
 
-                      if(product.care.isNotEmpty)...[
+                      if(widget.product.care.isNotEmpty)...[
                         SizedBox(height: 16 * sW,),
 
                         Container(
@@ -300,7 +310,7 @@ class ProductDetailsPage extends ConsumerWidget {
                           padding: EdgeInsets.symmetric(horizontal: 16 * sW, vertical: 6.25 * sW),
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            product.care,
+                            widget.product.care,
                             style: GoogleFonts.tenorSans(
                               fontSize: 14 * sW,
                               color: const Color(0xFF555555),
@@ -310,7 +320,7 @@ class ProductDetailsPage extends ConsumerWidget {
 
                         SizedBox(height: 13 * sW,),
 
-                        for (int i = 0; i < product.info.length; ++i)...[
+                        for (int i = 0; i < widget.product.info.length; ++i)...[
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 16 * sW, vertical: 6.25 * sW),
                             alignment: Alignment.centerLeft,
@@ -319,12 +329,12 @@ class ProductDetailsPage extends ConsumerWidget {
                                 SizedBox(
                                   height: 20 * sW,
                                   width: 20 * sW,
-                                  child: SvgPicture.string(careSGVs[product.info[i].toUpperCase()]!),
+                                  child: SvgPicture.string(careSGVs[widget.product.info[i].toUpperCase()]!),
                                 ),
                                 SizedBox(width: 12.5 * sW,),
                                 Expanded(
                                   child: Text(
-                                    product.info[i],
+                                    widget.product.info[i],
                                     style: GoogleFonts.tenorSans(
                                       fontSize: 14 * sW,
                                       color: const Color(0xFF555555),
@@ -337,7 +347,7 @@ class ProductDetailsPage extends ConsumerWidget {
                         ]
                       ],
 
-                      if(product.origin.isNotEmpty)...[
+                      if(widget.product.origin.isNotEmpty)...[
                         SizedBox(height: 16 * sW,),
 
                         Container(
@@ -357,7 +367,7 @@ class ProductDetailsPage extends ConsumerWidget {
                           padding: EdgeInsets.symmetric(horizontal: 16 * sW, vertical: 6.25 * sW),
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            product.origin,
+                            widget.product.origin,
                             style: GoogleFonts.tenorSans(
                               fontSize: 14 * sW,
                               color: const Color(0xFF555555),
@@ -428,7 +438,6 @@ class ImageViewFullScreen extends StatefulWidget {
   @override
   State<ImageViewFullScreen> createState() => _ImageViewFullScreenState();
 }
-
 class _ImageViewFullScreenState extends State<ImageViewFullScreen> {
   late PageController imagesController;
   int currentPage = 0;

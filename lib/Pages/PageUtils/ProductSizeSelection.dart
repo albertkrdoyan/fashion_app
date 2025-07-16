@@ -12,7 +12,6 @@ class ProductSizeSelection extends ConsumerStatefulWidget {
   @override
   ConsumerState<ProductSizeSelection> createState() => _ProductSizeSelectionState();
 }
-
 class _ProductSizeSelectionState extends ConsumerState<ProductSizeSelection> {
   int selectedSize = 0;
 

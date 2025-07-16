@@ -13,7 +13,6 @@ class CheckoutPage extends ConsumerStatefulWidget {
   @override
   ConsumerState<CheckoutPage> createState() => _CheckoutPageState();
 }
-
 class _CheckoutPageState extends ConsumerState<CheckoutPage> {
   final List<List<dynamic>> shippingMethods = [
     ['Standard Shipping, 3–7 business days', 1900.0],
@@ -46,7 +45,7 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
         backgroundColor: Colors.white,
         centerTitle: true,
         toolbarHeight: 60 * sW,
-        title: Image.asset('lib/Images/HomePage/Logo/Logo.png'),
+        title: SvgPicture.asset('lib/Images/HomePage/Logo/Logo.svg'),
       ),
       bottomNavigationBar: SafeArea(
         child: SizedBox(

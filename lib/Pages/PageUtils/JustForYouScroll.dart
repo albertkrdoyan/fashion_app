@@ -9,43 +9,54 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../Utils/DrawPageIndicator.dart';
 
-class JustForYouScroll extends ConsumerWidget {
-  JustForYouScroll({super.key, required this.sW});
+class JustForYouScroll extends ConsumerStatefulWidget {
+  const JustForYouScroll({super.key, required this.sW});
+
   final double sW;
 
+  @override
+  ConsumerState<JustForYouScroll> createState() => _StateJustForYouScroll();
+}
+class _StateJustForYouScroll extends ConsumerState<JustForYouScroll>{
   final justForYouSectionController = PageController(viewportFraction: 0.68);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    justForYouSectionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
-      height: 531 * sW,
-      width: 375 * sW,
+      height: 531 * widget.sW,
+      width: 375 * widget.sW,
       child: Column(
         children: [
-          SizedBox(height: 45 * sW,),
+          SizedBox(height: 45 * widget.sW,),
 
           Text(
             'JUST FOR YOU',
             style: GoogleFonts.tenorSans(
                 color: Colors.black,
                 letterSpacing: 10,
-                fontSize: 20 * sW
+                fontSize: 20 * widget.sW
             ),
           ),
 
           const LinePattern(backColor: Colors.white, color: Color(0xFF222222)),
 
-          SizedBox(height: 22 * sW,),
+          SizedBox(height: 22 * widget.sW,),
 
           JustForYouSection(
             justForYouSectionController: justForYouSectionController,
-            sW: sW,
+            sW: widget.sW,
             count: 5,
           ),
 
-          SizedBox(height: 17 * sW,),
+          SizedBox(height: 17 * widget.sW,),
 
-          DrawPageIndicator(controller: justForYouSectionController, size: 6.5 * sW, count: 5,),
+          DrawPageIndicator(controller: justForYouSectionController, size: 6.5 * widget.sW, count: 5,),
 
           // SizedBox(height: screenHeight * 0.04,),
         ],
